@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closed Cases by Close Reason</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" id="logo">
+        <h1>JALA Cases Analysis</h1>
+    </header>
+
+    <div id="container">
+        <div id="left-box">
+            <div><br></div>
+            <h2>Use the following filters to view the data:</h2>
+            <div><br></div>
+
+            <!-- Year Checkboxes -->
+            <h2>Select Year(s)</h2>
+            <div id="year-selection">
+                <label><input type="checkbox" value="2007" checked>2007</label>
+                <label><input type="checkbox" value="2008" checked>2008</label>
+                <label><input type="checkbox" value="2009" checked>2009</label>
+                <label><input type="checkbox" value="2010" checked>2010</label>
+                <label><input type="checkbox" value="2011" checked>2011</label>
+                <label><input type="checkbox" value="2012" checked>2012</label>
+                <label><input type="checkbox" value="2013" checked>2013</label>
+                <label><input type="checkbox" value="2014" checked>2014</label>
+                <label><input type="checkbox" value="2015" checked>2015</label>
+                <label><input type="checkbox" value="2016" checked>2016</label>
+                <label><input type="checkbox" value="2017" checked>2017</label>
+                <label><input type="checkbox" value="2018" checked>2018</label>
+                <label><input type="checkbox" value="2019" checked>2019</label>
+                <label><input type="checkbox" value="2020" checked>2020</label>
+                <label><input type="checkbox" value="2021" checked>2021</label>
+                <label><input type="checkbox" value="2022" checked>2022</label>
+                <label><input type="checkbox" value="2023" checked>2023</label>
+                <label><input type="checkbox" value="2024" checked>2018</label>
+            </div>
+
+            <!-- Program Dropdown -->
+            <h2>Select Program</h2>
+            <div id="program-selection">
+                <select id="program-dropdown">
+                    <option value="All Programs" selected>All Programs</option>
+                    <option value="Baker Defense Project" selected>Baker Defense Project</option>
+                    <option value="Community Development" selected>Community Development</option>
+                    <option value="Consumer Law" selected>Consumer Law</option>
+                    <option value="Deaf/Hard-of-Hearing" selected>Deaf/Hard-of-Hearing</option>
+                    <option value="Education Law" selected>Education Law</option>
+                    <option value="Elder Law" selected>Elder Law</option>
+                    <option value="Employment Law" selected>Employment Law</option>
+                    <option value="Fair Housing" selected>Fair Housing</option>
+                    <option value="Family Law" selected>Family Law</option>
+                    <option value="FLARE" selected>FLARE</option>
+                    <option value="General" selected>General</option>
+                    <option value="Housing Law" selected>Housing Law</option>
+                    <option value="Immigration Law" selected>Immigration Law</option>
+                    <option value="Intake Dept" selected>Intake Dept</option>
+                    <option value="Mental Health" selected>Mental Health</option>
+                    <option value="NFMLP" selected>NFMLP</option>
+                    <option value="PAI Compensated" selected>PAI Compensated</option>
+                    <option value="Prisoner Re-Entry" selected>Prisoner Re-Entry</option>
+                    <option value="Pro Bono" selected>Pro Bono</option>
+                    <option value="Ryan White" selected>Ryan White</option>
+                    <option value="Social Security" selected>Social Security</option>
+                    <option value="Staff" selected>Staff</option>
+                    <option value="Veterans Unit" selected>Veterans Unit</option>
+                </select>
+            </div>
+
+            <!-- Funding Code Dropdown -->
+            <h2>Select Funding Code</h2>
+            <div id="funding-code-selection">
+                <select id="funding-code-dropdown">
+                    <option value="All Funding Codes" selected>All Funding Codes</option>
+                    <option value="01 LSC" selected>01 LSC</option>
+                    <option value="05 HancockWhitney/HPRP" selected>05 HancockWhitney/HPRP</option>
+                    <option value="06 CDP COVID Response Fund" selected>06 CDP COVID Response Fund</option>
+                    <option value="11 Fla Bar Children's Grant" selected>11 Fla Bar Children's Grant</option>
+                    <option value="12 United Way" selected>12 United Way</option>
+                    <option value="13 LTC Ombudsman Program" selected>13 LTC Ombudsman Program</option>
+                    <option value="14 IOTA" selected>14 IOTA</option>
+                    <option value="15 State CLA" selected>15 State CLA</option>
+                    <option value="16 Title IIIB" selected>16 Title IIIB</option>
+                    <option value="17 Title IIIE Family Caregiver" selected>17 Title IIIE Family Caregiver</option>
+                    <option value="18 COJ PSG for Homeless" selected>18 COJ PSG for Homeless</option>
+                    <option value="19 COJ Foreclosure Mitigation" selected>19 COJ Foreclosure Mitigation</option>
+                    <option value="20 Ryan White" selected>20 Ryan White</option>
+                    <option value="21 FH MRC EOI" selected>21 FH MRC EOI</option>
+                    <option value="22 Fair Housing" selected>22 Fair Housing</option>
+                    <option value="23 FH MRC PEI" selected>23 FH MRC PEI</option>
+                    <option value="24 Hospital Project" selected>24 Hospital Project</option>
+                    <option value="26 City PSG - Financial Stability" selected>26 City PSG - Financial Stability</option>
+                    <option value="28 COJ Critical Quality of Life" selected>28 COJ Critical Quality of Life</option>
+                    <option value="30 HUD Comp Hsg Couns" selected>30 HUD Comp Hsg Couns</option>
+                    <option value="31 UW SJC ARPA/HUD PL & LM" selected>31 UW SJC ARPA/HUD PL & LM</option>
+                    <option value="32 COJ SHIP Grant" selected>32 COJ SHIP Grant</option>
+                    <option value="33 Clay SHIP Grant/ARC" selected>33 Clay SHIP Grant/ARC</option>
+                    <option value="34 HUD Eviction Protection/FHFC/JBA" selected>34 HUD Eviction Protection/FHFC/JBA</option>
+                    <option value="35 FBF Citi/LSGMI" selected>35 FBF Citi/LSGMI</option>
+                    <option value="36 NFDM/Project Reinvest/NFMC" selected>36 NFDM/Project Reinvest/NFMC</option>
+                    <option value="37  Wells Fargo / IFLA" selected>37  Wells Fargo / IFLA</option>
+                    <option value="38 NTAPP Consumer/Chase" selected>38 NTAPP Consumer/Chase</option>
+                    <option value="39 BOA Foreclosure Defense" selected>39 BOA Foreclosure Defense</option>
+                    <option value="40 General" selected>40 General</option>
+                    <option value="41 IOTA Pro Bono" selected>41 IOTA Pro Bono</option>
+                    <option value="42 LSC ineligible PAI" selected>42 LSC ineligible PAI</option>
+                    <option value="46 Clay VAWA-CLA Direct" selected>46 Clay VAWA-CLA Direct</option>
+                    <option value="48 VA LSHAV" selected>48 VA LSHAV</option>
+                    <option value="49 FLVH/Braive" selected>49 FLVH/Braive</option>
+                    <option value="54 BLES Grant" selected>54 BLES Grant</option>
+                    <option value="55 NFMC Legal Assistance" selected>55 NFMC Legal Assistance</option>
+                    <option value="60 COJ HPR/FBF HSW/CDBG FH" selected>60 COJ HPR/FBF HSW/CDBG FH</option>
+                    <option value="61 FBF - Engle" selected>61 FBF - Engle</option>
+                    <option value="62 FBA - LAP" selected>62 FBA - LAP</option>
+                    <option value="63 LISC/FBF Seal/Expunge" selected>63 LISC/FBF Seal/Expunge</option>
+                    <option value="64 STOP" selected>64 STOP</option>
+                    <option value="65 City JAG Ex-offenders Project" selected>65 City JAG Ex-offenders Project</option>
+                    <option value="67 Family Foundations" selected>67 Family Foundations</option>
+                    <option value="68 Mark to Market" selected>68 Mark to Market</option>
+                    <option value="69 City Ex-Offenders" selected>69 City Ex-Offenders</option>
+                    <option value="71 CareerSource Project" selected>71 CareerSource Project</option>
+                    <option value="72 IRS Project" selected>72 IRS Project</option>
+                    <option value="73 Youth in Crisis" selected>73 Youth in Crisis</option>
+                    <option value="74 Mental Health Proj." selected>74 Mental Health Proj.</option>
+                    <option value="75 COJ PSG Disability Rights" selected>75 COJ PSG Disability Rights</option>
+                    <option value="76 State Refugee Proj." selected>76 State Refugee Proj.</option>
+                    <option value="77 FBF Wealth Building / Low Bono" selected>77 FBF Wealth Building / Low Bono</option>
+                    <option value="78 CLINIC Family Reunification" selected>78 CLINIC Family Reunification</option>
+                    <option value="79 TCF Hsg Clinic/FBF PB/FBF Med" selected>79 TCF Hsg Clinic/FBF PB/FBF Med</option>
+                    <option value="80 Family Law Unbundled" selected>80 Family Law Unbundled</option>
+                    <option value="81 VAWA Stimulus" selected>81 VAWA Stimulus</option>
+                    <option value="82 VOCA" selected>82 VOCA</option>
+                    <option value="83 LAV Grant" selected>83 LAV Grant</option>
+                    <option value="84 Lazarus /Immigrant" selected>84 Lazarus /Immigrant</option>
+                    <option value="85  STJ CDBG / INVEST" selected>85  STJ CDBG / INVEST</option>
+                    <option value="86 VAWA/STOP" selected>86 VAWA/STOP</option>
+                    <option value="87 Violence Against Women/Match" selected>87 Violence Against Women/Match</option>
+                    <option value="88 CDBG Comm Dev" selected>88 CDBG Comm Dev</option>
+                    <option value="89 VOCA-STJ/Old ARRA" selected>89 VOCA-STJ/Old ARRA</option>
+                    <option value="94 PI Referral" selected>94 PI Referral</option>
+                </select>
+            </div>
+
+            <div><br></div>
+
+            <!-- Go Button -->
+            <button onclick="updateCharts()">Go</button>
+            <div><br><br><br><br><br><br><br></div>
+            <div><h4>Data derived from Closed Cases - By Closing Reason Report on Legal Server</h4></div>
+        </div>
+
+        <div id="right-box">
+            <!-- Div for the charts -->
+            <div id="chart-close-reason"></div>
+            <div id="chart-age"></div>
+            <div id="chart-gender"></div>
+            <div id="chart-race"></div>
+            <h2>Total Number Helped: <span id="total-helped"></span></h2>
+            <div id="legal-problem-chart-container">
+                <h3>Top Legal Problems</h3>
+                <div id="legal-problem-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allData = [];
+    
+        // Load the JSON data
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                allData = data;
+                updateCharts(); // Initialize the charts on launch
+            });
+    
+        // Function to update the charts based on selected filters
+        function updateCharts() {
+            // Get selected years
+            const selectedYears = Array.from(document.querySelectorAll('#year-selection input:checked')).map(cb => parseInt(cb.value));
+    
+            // Get selected program, legal problem, and funding code
+            const selectedProgram = document.getElementById('program-dropdown').value;
+            const selectedFundingCode = document.getElementById('funding-code-dropdown').value;
+    
+            // Filter data based on the selected filters
+            let filteredData = allData.filter(item => {
+                const yearMatch = selectedYears.includes(item['Year Closed']);
+                const programMatch = selectedProgram === 'All Programs' || item['Program Name'] === selectedProgram;
+                const fundingCodeMatch = selectedFundingCode === 'All Funding Codes' || item['Funding Code(s)'] === selectedFundingCode;
+                return yearMatch && programMatch && fundingCodeMatch;
+            });
+    
+            // Update each chart
+            updateCloseReasonChart(filteredData);
+            updateAgeChart(filteredData);
+            updateGenderChart(filteredData);
+            updateRaceChart(filteredData);
+    
+            // Update total number helped
+            updateTotalHelped(filteredData);
+    
+            // Update top legal problems chart
+            updateLegalProblemChart(filteredData);
+        }
+    
+        // Example chart update functions (these can be customized with specific chart logic)
+        function updateCloseReasonChart(data) {
+            const closeReasons = data.reduce((acc, item) => {
+                acc[item['Case Close Reason']] = (acc[item['Case Close Reason']] || 0) + 1;
+                return acc;
+            }, {});
+    
+            // Example using Chart.js (can be adjusted as needed)
+            const chartData = {
+                labels: Object.keys(closeReasons),
+                datasets: [{
+                    label: 'Case Close Reasons',
+                    data: Object.values(closeReasons),
+                    backgroundColor: ['#f39c12', '#3498db', '#e74c3c', '#2ecc71'],
+                }]
+            };
+    
+            // Create or update the chart (replace with your actual chart code)
+            new Chart(document.getElementById('chart-close-reason'), {
+                type: 'pie',
+                data: chartData,
+            });
+        }
+    
+        function updateAgeChart(data) {
+            const ageGroups = data.reduce((acc, item) => {
+                acc[item['Age at Intake']] = (acc[item['Age at Intake']] || 0) + 1;
+                return acc;
+            }, {});
+    
+            const chartData = {
+                labels: Object.keys(ageGroups),
+                datasets: [{
+                    label: 'Age at Intake',
+                    data: Object.values(ageGroups),
+                    backgroundColor: ['#e74c3c', '#8e44ad', '#2ecc71', '#3498db'],
+                }]
+            };
+    
+            new Chart(document.getElementById('chart-age'), {
+                type: 'bar',
+                data: chartData,
+            });
+        }
+    
+        function updateGenderChart(data) {
+            const genderGroups = data.reduce((acc, item) => {
+                acc[item['Gender']] = (acc[item['Gender']] || 0) + 1;
+                return acc;
+            }, {});
+    
+            const chartData = {
+                labels: Object.keys(genderGroups),
+                datasets: [{
+                    label: 'Gender Distribution',
+                    data: Object.values(genderGroups),
+                    backgroundColor: ['#3498db', '#e74c3c'],
+                }]
+            };
+    
+            new Chart(document.getElementById('chart-gender'), {
+                type: 'pie',
+                data: chartData,
+            });
+        }
+    
+        function updateRaceChart(data) {
+            const raceGroups = data.reduce((acc, item) => {
+                acc[item['Race']] = (acc[item['Race']] || 0) + 1;
+                return acc;
+            }, {});
+    
+            const chartData = {
+                labels: Object.keys(raceGroups),
+                datasets: [{
+                    label: 'Race Distribution',
+                    data: Object.values(raceGroups),
+                    backgroundColor: ['#2ecc71', '#e74c3c', '#3498db'],
+                }]
+            };
+    
+            new Chart(document.getElementById('chart-race'), {
+                type: 'pie',
+                data: chartData,
+            });
+        }
+    
+        function updateTotalHelped(data) {
+            const totalHelped = data.reduce((sum, item) => sum + item['Total Number Helped'], 0);
+            document.getElementById('total-helped').textContent = totalHelped;
+        }
+    
+        function updateLegalProblemChart(data) {
+            const legalProblems = data.reduce((acc, item) => {
+                acc[item['Legal Problem']] = (acc[item['Legal Problem']] || 0) + 1;
+                return acc;
+            }, {});
+    
+            const sortedProblems = Object.entries(legalProblems).sort((a, b) => b[1] - a[1]).slice(0, 10);
+            
+            const chartData = {
+                labels: sortedProblems.map(item => item[0]),
+                datasets: [{
+                    label: 'Top Legal Problems',
+                    data: sortedProblems.map(item => item[1]),
+                    backgroundColor: ['#e74c3c', '#3498db', '#f39c12', '#8e44ad', '#2ecc71'],
+                }]
+            };
+    
+            new Chart(document.getElementById('legal-problem-chart'), {
+                type: 'bar',
+                data: chartData,
+            });
+        }
+    </script>    
+</body>
+</html>
