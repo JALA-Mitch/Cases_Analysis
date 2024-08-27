@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closed Cases by Close Reason</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" id="logo">
+        <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Cases by Close Reason Analysis</h1>
+    </header>
+
+    <div id="container">
+        <div id="left-box">
+            <div><br></div>
+            <h2>Select Years and a Program to Filter Data</h2>
+            <div><br></div>
+
+            <!-- Year Checkboxes -->
+            <h2>Select Year(s)</h2>
+            <div id="year-selection">
+                <label><input type="checkbox" value="2018" checked>2018</label>
+                <label><input type="checkbox" value="2019" checked>2019</label>
+                <label><input type="checkbox" value="2020" checked>2020</label>
+                <label><input type="checkbox" value="2021" checked>2021</label>
+                <label><input type="checkbox" value="2022" checked>2022</label>
+                <label><input type="checkbox" value="2023" checked>2023</label>
+            </div>
+
+            <!-- Program Dropdown -->
+            <h2>Select Program</h2>
+            <div id="program-selection">
+                <select id="program-dropdown">
+                    <option value="All Programs" selected>All Programs</option>
+                    <option value="Community Development">Community Development</option>
+                    <option value="Consumer Law">Consumer Law</option>
+                    <option value="Deaf/Hard-of-Hearing">Deaf/Hard-of-Hearing</option>
+                    <option value="Education Law">Education Law</option>
+                    <option value="Elder Law">Elder Law</option>
+                    <option value="Employment Law">Employment Law</option>
+                    <option value="Fair Housing">Fair Housing</option>
+                    <option value="Family Law">Family Law</option>
+                    <option value="FLARE">FLARE</option>
+                    <option value="General">General</option>
+                    <option value="Housing Law">Housing Law</option>
+                    <option value="Immigration Law">Immigration Law</option>
+                    <option value="Intake Dept">Intake Dept</option>
+                    <option value="Mental Health">Mental Health</option>
+                    <option value="NFMLP">NFMLP</option>
+                    <option value="PAI Compensated">PAI Compensated</option>
+                    <option value="Prisoner Re-Entry">Prisoner Re-Entry</option>
+                    <option value="Ryan White">Ryan White</option>
+                    <option value="Social Security">Social Security</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Veterans Unit">Veterans Unit</option>
+                </select>
+            </div>
+
+            <div><br></div>
+
+            <!-- Go Button -->
+            <button onclick="updateChart()">Go</button>
+            <div><br><br><br><br><br><br><br></div>
+            <div><h4>Data derived from Closed Cases - By Closing Reason Report on Legal Server</h4></div>
+        </div>
+
+        <div id="right-box">
+            <!-- Div for the chart -->
+            <div id="chart"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let allData = [];
+
+        // Load the JSON data
+        fetch('filtered_data.json')
+            .then(response => response.json())
+            .then(data => {
+                allData = data;
+                updateChart(); // Initialize the chart on launch
+            });
+
+        // Function to update the chart based on selected years and the selected program
+        function updateChart() {
+            // Get selected years
+            const selectedYears = Array.from(document.querySelectorAll('#year-selection input:checked')).map(cb => parseInt(cb.value));
+
+            // Get selected program
+            const selectedProgram = document.getElementById('program-dropdown').value;
+
+            // Filter data based on selected years and program
+            let filteredData = allData.filter(item => selectedYears.includes(item['Year Closed']));
+
+            // If "All Programs" is NOT selected, filter by the selected program
+            if (selectedProgram !== 'All Programs') {
+                filteredData = filteredData.filter(item => item['Assigned Program'] === selectedProgram);
+            }
+
+            // Aggregate data for the chart
+            const chartData = filteredData.reduce((acc, item) => {
+                const closeReason = item['Close Reason'];
+                if (!acc[closeReason]) {
+                    acc[closeReason] = 0;
+                }
+                acc[closeReason] += item['ID#'];
+                return acc;
+            }, {});
+
+            // Prepare data for Plotly
+            const labels = Object.keys(chartData);
+            const values = Object.values(chartData);
+
+            // Update the pie chart
+            const plotData = [{
+                values: values,
+                labels: labels,
+                type: 'pie'
+            }];
+
+            const layout = {
+                title: `Close Reasons for Selected Years (${selectedYears.join(', ')}) and Program (${selectedProgram === 'All Programs' ? 'All Programs' : selectedProgram})`,
+                height: 600,
+                width: 1200
+            };
+
+            Plotly.newPlot('chart', plotData, layout);
+        }
+    </script>
+</body>
+</html>
