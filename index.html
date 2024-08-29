@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1><img src="logo.png" alt="Logo" id="logo">Case Analysis Dashboard</h1>
+        <h1><img src="logo.png" alt="Logo" id="logo">&ensp;Case Analysis Dashboard</h1>
     </header>
     <div class="container">
         <!-- Filters Section -->
@@ -212,7 +212,7 @@
                 const programMatch = selectedProgram === 'all' || item['Program Name'] === selectedProgram;
 
                 // Funding Code filter
-                const fundingCodeMatch = selectedFundingCode === 'all' || item['Funding Code'] === selectedFundingCode;
+                const fundingCodeMatch = selectedFundingCode === 'all' || item['Funding Code(s)'] === selectedFundingCode;
 
                 return yearMatch && programMatch && fundingCodeMatch;
             });
