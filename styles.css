@@ -86,11 +86,12 @@ button#goButton:hover {
     grid-template-columns: repeat(2, 1fr); /* 2 columns */
     grid-template-rows: repeat(2, 1fr); /* 2 rows */
     /*gap: 1em;*/
+    width: 100%;
 }
 
 .pie-chart {
     background-color: #ffffff;
-    padding: 1em;
+    /*padding: 1em;*/
     border-radius: 1px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     height: 350px; /* height */
