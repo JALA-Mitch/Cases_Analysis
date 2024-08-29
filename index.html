@@ -15,9 +15,10 @@
         <!-- Filters Section -->
         <div class="filters">
             <h2>Filters</h2>
+            <h3>Select/Deselect Filters and Click "Go" to Update Data</h3>
             <div class="filter-group">
                 <label for="year">Year</label>
-                <select id="year">
+                <select id="year" multiple>
                     <option value="all" selected>All Years</option>
                     <option value="2007">2007</option>
                     <option value="2008">2008</option>
@@ -41,7 +42,7 @@
             </div>
             <div class="filter-group">
                 <label for="program">Program</label>
-                <select id="program">
+                <select id="program" multiple>
                     <option value="all" selected>All Programs</option>
                     <option value="Baker Defense Project">Baker Defense Project</option>
                     <option value="Community Development">Community Development</option>
@@ -70,7 +71,7 @@
             </div>
             <div class="filter-group">
                 <label for="funding-code">Funding Code</label>
-                <select id="funding-code">
+                <select id="funding-code" multiple>
                     <option value="all" selected>All Funding Codes</option>
                     <option value="01 LSC">01 LSC</option>
                     <option value="05 HancockWhitney/HPRP">05 HancockWhitney/HPRP</option>
@@ -204,7 +205,33 @@
                 updateCharts(); // Initialize the charts on page load
             });
 
+        function getSelectedValues(selectElement) {
+            const selectedOptions = Array.from(selectElement.selectedOptions);
+            const values = selectedOptions.map(option => option.value);
+            return values;
+        }
+
         function updateCharts() {
+            // Get the selected values from filters (as arrays)
+            const selectedYears = getSelectedValues(document.getElementById('year'));
+            const selectedPrograms = getSelectedValues(document.getElementById('program'));
+            const selectedFundingCodes = getSelectedValues(document.getElementById('funding-code'));
+
+            // Filter data based on selected filters
+            let filteredData = allData.filter(item => {
+                // Year filter
+                const yearMatch = selectedYears.includes('all') || selectedYears.includes(item['Year Closed']);
+
+                // Program filter
+                const programMatch = selectedPrograms.includes('all') || selectedPrograms.includes(item['Program Name']);
+
+                // Funding Code filter
+                const fundingCodeMatch = selectedFundingCodes.includes('all') || selectedFundingCodes.includes(item['Funding Code(s)']);
+
+                return yearMatch && programMatch && fundingCodeMatch;
+            });
+
+        /*function updateCharts() {
             // Get the selected values from filters
             const selectedYear = document.getElementById('year').value;
             const selectedProgram = document.getElementById('program').value;
@@ -222,7 +249,7 @@
                 const fundingCodeMatch = selectedFundingCode === 'all' || item['Funding Code(s)'] === selectedFundingCode;
 
                 return yearMatch && programMatch && fundingCodeMatch;
-            });
+            });*/
 
             // Update charts with the filtered data
             updateBarChart(filteredData);
