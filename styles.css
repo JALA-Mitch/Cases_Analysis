@@ -85,7 +85,7 @@ button#goButton:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 columns */
     grid-template-rows: repeat(2, 1fr); /* 2 rows */
-    gap: 1em;
+    /*gap: 1em;*/
 }
 
 .pie-chart {
