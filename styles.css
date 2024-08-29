@@ -10,7 +10,7 @@ header {
     color: white;
     padding: 1em;
     text-align: left;
-    height: 50px;
+    height: 10%;
 }
 
 .container {
@@ -19,7 +19,7 @@ header {
     grid-template-rows: auto 1fr auto;
     gap: 1em;
     margin: 1em;
-    height: calc(100% - 50px); /* Adjust for the header */
+    height: 90%;
 }
 
 .filters {
