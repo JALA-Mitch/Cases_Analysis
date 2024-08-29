@@ -6,6 +6,8 @@
     <title>Case Analysis Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
 </head>
 <body>
     <header>
@@ -306,14 +308,6 @@
         }
 
         function createPieChart(canvasId, dataCounts, label) {
-            // Sort dataCounts by value and get the top 8 entries
-            const sortedEntries = Object.entries(dataCounts).sort((a, b) => b[1] - a[1]);
-            const topEntries = sortedEntries.slice(0, 5);
-
-            // Extract labels and data for the top 8 entries
-            const labels = topEntries.map(entry => entry[0]);
-            const data = topEntries.map(entry => entry[1]);
-
             const ctx = document.getElementById(canvasId).getContext('2d');
             pieChartInstances[canvasId] = new Chart(ctx, {
                 type: 'pie',
@@ -345,7 +339,23 @@
                     plugins: {
                         legend: {
                             position: 'top',
-                        }
+                        },
+                        datalabels: {
+                            display: true,
+                            formatter: function(value, context) {
+                                // Only show labels for the top 5 items
+                                const data = context.chart.data.datasets[0].data;
+                                const top5 = data.slice(0, 5);
+                                const index = data.indexOf(value);
+                                return top5.includes(value) ? `${value}%` : '';
+                            },
+                            anchor: 'end',
+                            align: 'end',
+                            color: '#000',
+                            font: {
+                                weight: 'bold'
+                    }
+                }
                     }
                 }
             });
