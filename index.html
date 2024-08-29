@@ -345,10 +345,24 @@
                     }]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     responsive: true,
                     plugins: {
                         legend: {
                             position: 'right',
+                            labels: {
+                                padding: 20, // Increase this if labels overlap with the edges
+                            }
+                        },
+                        datalabels: {
+                            font: {
+                                size: 12 // Adjust font size for the labels
+                            },
+                            align: 'end', // Or 'start', 'center', 'right', 'left'
+                            offset: 10,   // Adjust the offset from the center
+                            borderRadius: 4,
+                            borderColor: 'black',
+                            borderWidth: 2
                         }
                     }
                 }
