@@ -19,7 +19,7 @@ header {
     grid-template-rows: auto 1fr auto;
     gap: 1em;
     margin: 1em;
-    height: calc(100vh - 50px); /* Adjust for the header */
+    height: calc(100% - 50px); /* Adjust for the header */
 }
 
 .filters {
@@ -87,7 +87,6 @@ button#goButton:hover {
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     height: 350px; /* height */
-    width: 70%; /* width */
 }
 
 /* Statistics Section */
