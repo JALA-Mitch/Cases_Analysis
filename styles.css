@@ -21,6 +21,7 @@ header {
 header h1 {
     font-size: 24px;
     color: white;
+    align-items: center;
 }
 
 .container {
