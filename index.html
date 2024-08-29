@@ -285,13 +285,13 @@
             const closeReasonCounts = getCounts(data, 'Case Close Reason');
             const raceCounts = getCounts(data, 'Race');
             const genderCounts = getCounts(data, 'Gender');
-            const ageCounts = getCounts(data, 'Age at Intake');
+            const ageGroupCounts = getCounts(data, 'Age Group');
 
             // Update the pie charts
             createPieChart('close_reason_pie', closeReasonCounts, 'Case Close Reason');
             createPieChart('race_pie', raceCounts, 'Race');
             createPieChart('gender_pie', genderCounts, 'Gender');
-            createPieChart('age_pie', ageCounts, 'Age at Intake');
+            createPieChart('age_pie', ageGroupCounts, 'Age at Intake');
         }
 
         function getCounts(data, key) {
