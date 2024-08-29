@@ -3,51 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Closed Cases by Close Reason</title>
+    <title>Case Analysis Dashboard</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script>
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Logo" id="logo">
-        <h1>JALA Cases Analysis</h1>
+        <h1>Case Analysis Dashboard</h1>
     </header>
-
-    <div id="container">
-        <div id="left-box">
-            <div><br></div>
-            <h2>Use the following filters to view the data:</h2>
-            <div><br></div>
-
-            <!-- Year Checkboxes -->
-            <h2>Select Year(s)</h2>
-            <div id="year-selection">
-                <label><input type="checkbox" value="2007" checked>2007</label>
-                <label><input type="checkbox" value="2008" checked>2008</label>
-                <label><input type="checkbox" value="2009" checked>2009</label>
-                <label><input type="checkbox" value="2010" checked>2010</label>
-                <label><input type="checkbox" value="2011" checked>2011</label>
-                <label><input type="checkbox" value="2012" checked>2012</label>
-                <label><input type="checkbox" value="2013" checked>2013</label>
-                <label><input type="checkbox" value="2014" checked>2014</label>
-                <label><input type="checkbox" value="2015" checked>2015</label>
-                <label><input type="checkbox" value="2016" checked>2016</label>
-                <label><input type="checkbox" value="2017" checked>2017</label>
-                <label><input type="checkbox" value="2018" checked>2018</label>
-                <label><input type="checkbox" value="2019" checked>2019</label>
-                <label><input type="checkbox" value="2020" checked>2020</label>
-                <label><input type="checkbox" value="2021" checked>2021</label>
-                <label><input type="checkbox" value="2022" checked>2022</label>
-                <label><input type="checkbox" value="2023" checked>2023</label>
-                <label><input type="checkbox" value="2024" checked>2018</label>
+    <div class="container">
+        <!-- Filters Section -->
+        <div class="filters">
+            <h2>Filters</h2>
+            <div class="filter-group">
+                <label for="year">Year</label>
+                <select id="year">
+                    <option value="all">All Years</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
             </div>
-
-            <!-- Program Dropdown -->
-            <h2>Select Program</h2>
-            <div id="program-selection">
-                <select id="program-dropdown">
-                    <option value="All Programs" selected>All Programs</option>
+            <div class="filter-group">
+                <label for="program">Program</label>
+                <select id="program">
+                    <option value="all">All Programs</option>
                     <option value="Baker Defense Project" selected>Baker Defense Project</option>
                     <option value="Community Development" selected>Community Development</option>
                     <option value="Consumer Law" selected>Consumer Law</option>
@@ -73,12 +69,10 @@
                     <option value="Veterans Unit" selected>Veterans Unit</option>
                 </select>
             </div>
-
-            <!-- Funding Code Dropdown -->
-            <h2>Select Funding Code</h2>
-            <div id="funding-code-selection">
-                <select id="funding-code-dropdown">
-                    <option value="All Funding Codes" selected>All Funding Codes</option>
+            <div class="filter-group">
+                <label for="funding-code">Funding Code</label>
+                <select id="funding-code">
+                    <option value="all">All Funding Codes</option>
                     <option value="01 LSC" selected>01 LSC</option>
                     <option value="05 HancockWhitney/HPRP" selected>05 HancockWhitney/HPRP</option>
                     <option value="06 CDP COVID Response Fund" selected>06 CDP COVID Response Fund</option>
@@ -147,184 +141,199 @@
                     <option value="94 PI Referral" selected>94 PI Referral</option>
                 </select>
             </div>
-
-            <div><br></div>
-
-            <!-- Go Button -->
-            <button onclick="updateCharts()">Go</button>
+            <button id="goButton" onclick="updateCharts()">Go</button>
             <div><br><br><br><br><br><br><br></div>
             <div><h4>Data derived from Closed Cases - By Closing Reason Report on Legal Server</h4></div>
         </div>
 
-        <div id="right-box">
-            <!-- Div for the charts -->
-            <div id="chart-close-reason"></div>
-            <div id="chart-age"></div>
-            <div id="chart-gender"></div>
-            <div id="chart-race"></div>
-            <h2>Total Number Helped: <span id="total-helped"></span></h2>
-            <div id="legal-problem-chart-container">
-                <h3>Top Legal Problems</h3>
-                <div id="legal-problem-chart"></div>
+        <!-- Graphs Section -->
+        <div class="graphs">
+            <div class="bar-chart">
+                <h2>Top Legal Problems</h2>
+                <canvas id="top_legal_problems_bar"></canvas>
+            </div>
+            <div class="pie-charts">
+                <div class="pie-chart">
+                    <canvas id="close_reason_pie"></canvas>
+                </div>
+                <div class="pie-chart">
+                    <canvas id="race_pie"></canvas>
+                </div>
+                <div class="pie-chart">
+                    <canvas id="gender_pie"></canvas>
+                </div>
+                <div class="pie-chart">
+                    <canvas id="age_pie"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="statistics">
+            <div class="stat">
+                <h2>Total Cases</h2>
+                <p id="totalCases">0</p>
+            </div>
+            <div class="stat">
+                <h2>Total People Helped</h2>
+                <p id="totalPeopleHelped">0</p>
             </div>
         </div>
     </div>
 
     <script>
         let allData = [];
-    
+
         // Load the JSON data
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
                 allData = data;
-                updateCharts(); // Initialize the charts on launch
+                updateCharts(); // Initialize the charts on page load
             });
-    
-        // Function to update the charts based on selected filters
+
         function updateCharts() {
-            // Get selected years
-            const selectedYears = Array.from(document.querySelectorAll('#year-selection input:checked')).map(cb => parseInt(cb.value));
-    
-            // Get selected program, legal problem, and funding code
-            const selectedProgram = document.getElementById('program-dropdown').value;
-            const selectedFundingCode = document.getElementById('funding-code-dropdown').value;
-    
-            // Filter data based on the selected filters
+            // Get the selected values from filters
+            const selectedYear = document.getElementById('year').value;
+            const selectedProgram = document.getElementById('program').value;
+            const selectedFundingCode = document.getElementById('funding-code').value;
+
+            // Filter data based on selected filters
             let filteredData = allData.filter(item => {
-                const yearMatch = selectedYears.includes(item['Year Closed']);
-                const programMatch = selectedProgram === 'All Programs' || item['Program Name'] === selectedProgram;
-                const fundingCodeMatch = selectedFundingCode === 'All Funding Codes' || item['Funding Code(s)'] === selectedFundingCode;
+                // Year filter
+                const yearMatch = selectedYear === 'all' || item['Year Closed'] == selectedYear;
+
+                // Program filter
+                const programMatch = selectedProgram === 'all' || item['Program Name'] === selectedProgram;
+
+                // Funding Code filter
+                const fundingCodeMatch = selectedFundingCode === 'all' || item['Funding Code'] === selectedFundingCode;
+
                 return yearMatch && programMatch && fundingCodeMatch;
             });
-    
-            // Update each chart
-            updateCloseReasonChart(filteredData);
-            updateAgeChart(filteredData);
-            updateGenderChart(filteredData);
-            updateRaceChart(filteredData);
-    
-            // Update total number helped
-            updateTotalHelped(filteredData);
-    
-            // Update top legal problems chart
-            updateLegalProblemChart(filteredData);
+
+            // Update charts with the filtered data
+            updateBarChart(filteredData);
+            updatePieCharts(filteredData);
+            updateStatistics(filteredData);
         }
-    
-        // Example chart update functions (these can be customized with specific chart logic)
-        function updateCloseReasonChart(data) {
-            const closeReasons = data.reduce((acc, item) => {
-                acc[item['Case Close Reason']] = (acc[item['Case Close Reason']] || 0) + 1;
-                return acc;
-            }, {});
-    
-            // Example using Chart.js (can be adjusted as needed)
-            const chartData = {
-                labels: Object.keys(closeReasons),
-                datasets: [{
-                    label: 'Case Close Reasons',
-                    data: Object.values(closeReasons),
-                    backgroundColor: ['#f39c12', '#3498db', '#e74c3c', '#2ecc71'],
-                }]
-            };
-    
-            // Create or update the chart (replace with your actual chart code)
-            new Chart(document.getElementById('chart-close-reason'), {
-                type: 'pie',
-                data: chartData,
+
+        // Update Bar Chart (Top Legal Problems)
+        function updateBarChart(data) {
+            // Calculate the top legal problems
+            let legalProblemCounts = {};
+
+            data.forEach(item => {
+                const legalProblem = item['Legal Problem Code'];
+                if (legalProblem) {
+                    legalProblemCounts[legalProblem] = (legalProblemCounts[legalProblem] || 0) + 1;
+                }
             });
-        }
-    
-        function updateAgeChart(data) {
-            const ageGroups = data.reduce((acc, item) => {
-                acc[item['Age at Intake']] = (acc[item['Age at Intake']] || 0) + 1;
-                return acc;
-            }, {});
-    
-            const chartData = {
-                labels: Object.keys(ageGroups),
-                datasets: [{
-                    label: 'Age at Intake',
-                    data: Object.values(ageGroups),
-                    backgroundColor: ['#e74c3c', '#8e44ad', '#2ecc71', '#3498db'],
-                }]
-            };
-    
-            new Chart(document.getElementById('chart-age'), {
+
+            // Sort and get top 10 legal problems
+            const sortedLegalProblems = Object.entries(legalProblemCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
+
+            const labels = sortedLegalProblems.map(item => item[0]);
+            const counts = sortedLegalProblems.map(item => item[1]);
+
+            const ctx = document.getElementById('top_legal_problems_bar').getContext('2d');
+            new Chart(ctx, {
                 type: 'bar',
-                data: chartData,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Top Legal Problems',
+                        data: counts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
             });
         }
-    
-        function updateGenderChart(data) {
-            const genderGroups = data.reduce((acc, item) => {
-                acc[item['Gender']] = (acc[item['Gender']] || 0) + 1;
-                return acc;
-            }, {});
-    
-            const chartData = {
-                labels: Object.keys(genderGroups),
-                datasets: [{
-                    label: 'Gender Distribution',
-                    data: Object.values(genderGroups),
-                    backgroundColor: ['#3498db', '#e74c3c'],
-                }]
-            };
-    
-            new Chart(document.getElementById('chart-gender'), {
+
+        // Update Pie Charts (Close Reason, Race, Gender, Age)
+        function updatePieCharts(data) {
+            // Calculate counts for each category
+            const closeReasonCounts = getCounts(data, 'Case Close Reason');
+            const raceCounts = getCounts(data, 'Race');
+            const genderCounts = getCounts(data, 'Gender');
+            const ageCounts = getCounts(data, 'Age at Intake');
+
+            // Update the pie charts
+            createPieChart('close_reason_pie', closeReasonCounts, 'Case Close Reason');
+            createPieChart('race_pie', raceCounts, 'Race');
+            createPieChart('gender_pie', genderCounts, 'Gender');
+            createPieChart('age_pie', ageCounts, 'Age at Intake');
+        }
+
+        function getCounts(data, key) {
+            const counts = {};
+            data.forEach(item => {
+                const value = item[key];
+                if (value) {
+                    counts[value] = (counts[value] || 0) + 1;
+                }
+            });
+            return counts;
+        }
+
+        function createPieChart(canvasId, dataCounts, label) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
                 type: 'pie',
-                data: chartData,
+                data: {
+                    labels: Object.keys(dataCounts),
+                    datasets: [{
+                        data: Object.values(dataCounts),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
             });
         }
-    
-        function updateRaceChart(data) {
-            const raceGroups = data.reduce((acc, item) => {
-                acc[item['Race']] = (acc[item['Race']] || 0) + 1;
-                return acc;
-            }, {});
-    
-            const chartData = {
-                labels: Object.keys(raceGroups),
-                datasets: [{
-                    label: 'Race Distribution',
-                    data: Object.values(raceGroups),
-                    backgroundColor: ['#2ecc71', '#e74c3c', '#3498db'],
-                }]
-            };
-    
-            new Chart(document.getElementById('chart-race'), {
-                type: 'pie',
-                data: chartData,
-            });
+
+        // Update Statistics (Total Cases, Total People Helped)
+        function updateStatistics(data) {
+            const totalCases = data.length;
+            const totalPeopleHelped = data.reduce((sum, item) => sum + (item['Total People Helped'] || 0), 0);
+
+            document.getElementById('totalCases').innerText = totalCases;
+            document.getElementById('totalPeopleHelped').innerText = totalPeopleHelped;
         }
-    
-        function updateTotalHelped(data) {
-            const totalHelped = data.reduce((sum, item) => sum + item['Total Number Helped'], 0);
-            document.getElementById('total-helped').textContent = totalHelped;
-        }
-    
-        function updateLegalProblemChart(data) {
-            const legalProblems = data.reduce((acc, item) => {
-                acc[item['Legal Problem']] = (acc[item['Legal Problem']] || 0) + 1;
-                return acc;
-            }, {});
-    
-            const sortedProblems = Object.entries(legalProblems).sort((a, b) => b[1] - a[1]).slice(0, 10);
-            
-            const chartData = {
-                labels: sortedProblems.map(item => item[0]),
-                datasets: [{
-                    label: 'Top Legal Problems',
-                    data: sortedProblems.map(item => item[1]),
-                    backgroundColor: ['#e74c3c', '#3498db', '#f39c12', '#8e44ad', '#2ecc71'],
-                }]
-            };
-    
-            new Chart(document.getElementById('legal-problem-chart'), {
-                type: 'bar',
-                data: chartData,
-            });
-        }
-    </script>    
+
+    </script>
 </body>
 </html>

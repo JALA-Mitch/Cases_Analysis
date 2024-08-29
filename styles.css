@@ -1,117 +1,103 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Styles */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     margin: 0;
-    background-color: white;
+    padding: 0;
 }
 
-/* Header Styles */
 header {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
+    background-color: #0077cc;
+    color: white;
+    padding: 1em;
+    text-align: center;
 }
 
-#logo {
-    height: 50px;
-    margin-right: 20px;
+.container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: auto 1fr auto;
+    gap: 1em;
+    margin: 1em;
+    height: calc(100vh - 80px); /* Adjust for the header */
 }
 
-header h1 {
-    font-size: 24px;
-    color: black;
+.filters {
+    background-color: #f9f9f9;
+    padding: 1em;
+    border-radius: 8px;
 }
 
-/* Container Styles */
-#container {
-    display: flex;
-    padding: 20px;
-    height: calc(100vh - 60px); /* Adjust based on header height */
+.filters h2 {
+    margin-bottom: 1em;
 }
 
-/* Left Box Styles */
-#left-box {
-    flex: 0 0 30%; /* 30% width */
-    padding-left: 10px;
+.filter-group {
+    margin-bottom: 1em;
 }
 
-/* Right Box Styles */
-#right-box {
-    flex: 1; /* Takes remaining space */
-    background-color: white; /* Light gray for visibility */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the chart */
-}
-
-
-/* Heading Styles */
-h2 {
-    color: #333;
-}
-
-/* Container for Checkboxes and Dropdown */
-#year-selection, #program-selection {
-    margin-bottom: 20px;
-}
-
-#year-selection label, #program-selection select {
+.filter-group label {
     display: block;
-    margin: 10px 0;
+    margin-bottom: 0.5em;
 }
 
-/* Style for Checkboxes */
-#year-selection label {
-    font-size: 16px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-/* Style for Dropdown */
-#program-dropdown {
-    padding: 10px;
-    border: 1px solid #ddd;
+.filter-group select {
+    width: 100%;
+    padding: 0.5em;
     border-radius: 4px;
-    font-size: 16px;
+    border: 1px solid #ccc;
 }
 
-/* Button Styles */
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
+button#goButton {
+    background-color: #0077cc;
+    color: white;
     border: none;
+    padding: 0.7em;
     border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
+button#goButton:hover {
+    background-color: #005fa3;
 }
 
-/* Chart Container */
-#chart {
-    margin: 20px 0;
-    height: 100%; /* Set height for chart */
-    width: 100%; /* Ensure full width of the container */
-    background-color: #fff; /* Ensure visibility */
-    padding-bottom: 20%;
+/* Graphs Section */
+.graphs {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    gap: 1em;
 }
 
+.bar-chart {
+    background-color: #ffffff;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 
-/* Footer Text */
-h4 {
-    font-size: 14px;
-    color: #666;
+.pie-charts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+}
+
+.pie-chart {
+    background-color: #ffffff;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Statistics Section */
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+
+.stat {
+    background-color: #0077cc;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    border-radius: 8px;
 }
