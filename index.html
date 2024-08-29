@@ -220,7 +220,10 @@
             const selectedYears = getSelectedValues(document.getElementById('year'));
             const selectedPrograms = getSelectedValues(document.getElementById('program'));
             const selectedFundingCodes = getSelectedValues(document.getElementById('funding-code'));
-
+            console.log("Selected Years:", selectedYears);
+            console.log("Selected Programs:", selectedPrograms);
+            console.log("Selected Funding Codes:", selectedFundingCodes);
+            
             // Filter data based on selected filters
             let filteredData = allData.filter(item => {
                 // Year filter
@@ -235,25 +238,7 @@
                 return yearMatch && programMatch && fundingCodeMatch;
             });
 
-        /*function updateCharts() {
-            // Get the selected values from filters
-            const selectedYear = document.getElementById('year').value;
-            const selectedProgram = document.getElementById('program').value;
-            const selectedFundingCode = document.getElementById('funding-code').value;
-
-            // Filter data based on selected filters
-            let filteredData = allData.filter(item => {
-                // Year filter
-                const yearMatch = selectedYear === 'all' || item['Year Closed'] == selectedYear;
-
-                // Program filter
-                const programMatch = selectedProgram === 'all' || item['Program Name'] === selectedProgram;
-
-                // Funding Code filter
-                const fundingCodeMatch = selectedFundingCode === 'all' || item['Funding Code(s)'] === selectedFundingCode;
-
-                return yearMatch && programMatch && fundingCodeMatch;
-            });*/
+            console.log("Filtered Data:", filteredData);
 
             // Update charts with the filtered data
             updateBarChart(filteredData);
