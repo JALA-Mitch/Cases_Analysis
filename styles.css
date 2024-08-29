@@ -15,7 +15,7 @@ header {
     color: white;
     padding: 1em;
     text-align: left;
-    height: 70px;
+    height: 60px;
 }
 
 header h1 {
@@ -29,7 +29,7 @@ header h1 {
     grid-template-rows: auto 1fr auto;
     gap: 1em;
     margin: 1em;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 60px);
 }
 
 .filters {
