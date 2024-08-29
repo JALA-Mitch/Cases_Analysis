@@ -308,7 +308,7 @@
         function createPieChart(canvasId, dataCounts, label) {
             // Sort dataCounts by value and get the top 8 entries
             const sortedEntries = Object.entries(dataCounts).sort((a, b) => b[1] - a[1]);
-            const topEntries = sortedEntries.slice(0, 8);
+            const topEntries = sortedEntries.slice(0, 5);
 
             // Extract labels and data for the top 8 entries
             const labels = topEntries.map(entry => entry[0]);
