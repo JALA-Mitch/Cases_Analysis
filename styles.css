@@ -85,6 +85,8 @@ button#goButton:hover {
     padding: 1em;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    height: 300px; /* Example height */
+    width: 100%; /* Ensure it takes full width of its container */
 }
 
 /* Statistics Section */
