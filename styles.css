@@ -72,16 +72,12 @@ button#goButton:hover {
     padding: 1em;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 250px;
 }
 
 .pie-charts {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1em;
-    width: 100%;
-    height: 150px;
 }
 
 .pie-chart {
@@ -89,8 +85,6 @@ button#goButton:hover {
     padding: 1em;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 150px;
 }
 
 /* Statistics Section */
