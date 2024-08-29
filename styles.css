@@ -65,6 +65,7 @@ button#goButton:hover {
     display: grid;
     grid-template-rows: 1fr 2fr;
     gap: 1em;
+    height: 150px;
 }
 
 .bar-chart {
