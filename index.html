@@ -308,64 +308,82 @@
         }
 
         function createPieChart(canvasId, dataCounts, label) {
-        const ctx = document.getElementById(canvasId).getContext('2d');
-        const data = Object.values(dataCounts);
-        const labels = Object.keys(dataCounts);
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const data = Object.values(dataCounts);
+            const labels = Object.keys(dataCounts);
 
-        // Create a sorted list of data and labels based on values
-        const sortedData = data
-            .map((value, index) => ({ value, label: labels[index] }))
-            .sort((a, b) => b.value - a.value);
-        
-        // Only keep the top 8
-        const topData = sortedData.slice(0, 8);
-        const topLabels = topData.map(item => item.label);
-        const topValues = topData.map(item => item.value);
+            // Create a sorted list of data and labels based on values
+            const sortedData = data
+                .map((value, index) => ({ value, label: labels[index] }))
+                .sort((a, b) => b.value - a.value);
+            
+            // Only keep the top 8
+            const topData = sortedData.slice(0, 8);
+            const topLabels = topData.map(item => item.label);
+            const topValues = topData.map(item => item.value);
 
-        pieChartInstances[canvasId] = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: topLabels,
-                datasets: [{
-                    data: topValues,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return `${tooltipItem.label}: ${tooltipItem.raw}`;
+            pieChartInstances[canvasId] = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: topLabels,
+                    datasets: [{
+                        data: topValues,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                                }
                             }
+                        },
+                        datalabels: {
+                            display: true,
+                            anchor: 'end',
+                            align: 'start',
+                            formatter: function(value, context) {
+                                // Only show labels for the top 8 items
+                                const data = context.chart.data.datasets[0].data;
+                                const top8 = data.slice(0, 8);
+                                const index = data.indexOf(value);
+                                return top8.includes(value) ? `${value}%` : '';
+                            },
+                            color: '#000',
+                            font: {
+                                weight: 'bold',
+                                size: 12
+                            },
+                            offset: 10,
+                            clamp: true // Keeps labels within the chart area
                         }
-                    },
-                    // The datalabels plugin might be needed here, but since it's not working for you,
-                    // We are using the default settings.
+                    }
                 }
-            }
             });
-            }
+        }
+
 
 
         // Update Statistics (Total Cases, Total People Helped)
