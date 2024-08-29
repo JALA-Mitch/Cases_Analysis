@@ -91,7 +91,7 @@ button#goButton:hover {
 .pie-chart {
     background-color: #ffffff;
     padding: 1em;
-    border-radius: 8px;
+    border-radius: 1px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     height: 350px; /* height */
     width: 100%;
