@@ -297,16 +297,27 @@
             });
 
             // Calculate counts for each category
-            const closeReasonCounts = getCounts(data, 'Case Close Reason');
-            const raceCounts = getCounts(data, 'Race');
-            const genderCounts = getCounts(data, 'Gender');
-            const ageGroupCounts = getCounts(data, 'Age Group');
+            const closeReasonCounts = sortCountsByValue(getCounts(data, 'Case Close Reason'));
+            const raceCounts = sortCountsByValue(getCounts(data, 'Race'));
+            const genderCounts = sortCountsByValue(getCounts(data, 'Gender'));
+            const ageGroupCounts = sortCountsByValue(getCounts(data, 'Age Group'));
 
             // Update the pie charts
             createPieChart('close_reason_pie', closeReasonCounts, 'Case Close Reason');
             createPieChart('race_pie', raceCounts, 'Race');
             createPieChart('gender_pie', genderCounts, 'Gender');
             createPieChart('age_pie', ageGroupCounts, 'Age at Intake');
+        }
+
+        // Helper function to sort counts by value (descending order)
+        function sortCountsByValue(counts) {
+            const sorted = Object.entries(counts)
+                .sort((a, b) => b[1] - a[1]) // Sort by value in descending order
+                .reduce((acc, [key, value]) => {
+                    acc[key] = value;
+                    return acc;
+                }, {});
+            return sorted;
         }
 
         function getCounts(data, key) {
@@ -321,11 +332,11 @@
         }
 
         function createPieChart(canvasId, dataCounts, label) {
-            // Sort dataCounts by value and get the top 8 entries
+            // Sort dataCounts by value and get the top 5 entries
             const sortedEntries = Object.entries(dataCounts).sort((a, b) => b[1] - a[1]);
-            const topEntries = sortedEntries.slice(0, 8);
+            const topEntries = sortedEntries.slice(0, 5);
 
-            // Extract labels and data for the top 8 entries
+            // Extract labels and data for the top 5 entries
             const labels = topEntries.map(entry => entry[0]);
             const data = topEntries.map(entry => entry[1]);
 
