@@ -83,7 +83,7 @@ button#goButton:hover {
 .pie-charts {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .pie-chart {
