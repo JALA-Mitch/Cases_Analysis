@@ -72,8 +72,8 @@ button#goButton:hover {
 /* Graphs Section */
 .graphs {
     display: grid;
-    grid-template-rows: auto 1fr; /* Two rows: one for bar charts and one for pie charts */
-    gap: 1.5em; /* Space between bar charts and pie charts */
+    grid-template-rows: auto;
+    gap: 1.5em;
     padding: 1em;
 }
 
@@ -81,7 +81,7 @@ button#goButton:hover {
 .bar-charts {
     display: grid;
     grid-template-rows: 1fr 1fr; /* Two bar charts stacked vertically */
-    gap: 1.5em; /* Space between bar charts */
+    gap: 0.5em; /* Space between bar charts */
 }
 
 /* Pie Charts Section */
