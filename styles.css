@@ -71,32 +71,42 @@ button#goButton:hover {
 /* Graphs Section */
 .graphs {
     display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: auto;
-    gap: 1em;
+    grid-template-rows: auto auto; /* Two rows: one for bar charts, one for pie charts */
+    gap: 1.5em; /* Adjust space between rows */
+    padding: 1em;
 }
 
-/* Bar Chart */
-.bar-chart {
-    background-color: white;
-    padding: 1em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
+/* Bar Chart Section */
+.bar-charts {
+    display: grid;
+    grid-template-rows: 1fr 1fr; /* Two bar charts stacked vertically */
+    gap: 1.5em; /* Space between bar charts */
 }
 
 /* Pie Charts Section */
 .pie-charts {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Create 2 equal-width columns */
-    grid-template-rows: auto auto; /* Create rows based on content */
+    grid-template-rows: 1fr 1fr; /* Create 2 equal-height rows */
     gap: 1.5em; /* Adjust space between pie charts */
     padding: 1em;
 }
 
-.pie-chart {
+/* General Styles for Bar and Pie Charts */
+.bar-chart, .pie-chart {
     background-color: white;
     padding: 1em;
-    height: 350px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
+}
+
+/* Bar Charts */
+.bar-chart {
+    height: 300px; /* Adjust height as needed */
+}
+
+/* Pie Charts */
+.pie-chart {
+    height: 350px; /* Adjust height as needed */
     width: 100%; /* Ensure responsive width */
 }
 
@@ -114,10 +124,3 @@ button#goButton:hover {
     text-align: center;
     border-radius: 8px;
 }
-
-/* Adjust specific pie chart sizes */
-#close_reason_pie, #race_pie, #gender_pie, #age_pie {
-    width: 100%; /* Ensure responsive width */
-    height: 100%; /* Ensure responsive height */
-}
-
