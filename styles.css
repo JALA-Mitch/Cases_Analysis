@@ -26,14 +26,17 @@ header {
     box-sizing: border-box; /* Ensure padding and border are included in width calculation */
 }
 
+/* Filters Section */
 .filters {
     width: 20%;
     background-color: #f9f9f9;
     padding: 1em;
     border-radius: 8px;
     box-sizing: border-box; /* Ensure padding and border are included in width calculation */
+    overflow-y: auto; /* Adds vertical scrolling if content exceeds container size */
 }
 
+/* Filters Heading */
 .filters h2 {
     margin-bottom: 1em;
 }
@@ -90,8 +93,8 @@ button#goButton:hover {
     gap: 1em;
     margin-top: 1em; /* Space above the pie charts */
     box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
-    height: 600px; /* Fixed height for the pie charts section */
-    overflow: auto; /* Allows scrolling if pie charts exceed container height */
+    height: auto; /* Allow height to grow based on content */
+    overflow: hidden; /* Hide overflow to prevent scroll bars */
 }
 
 .pie-chart {
@@ -100,6 +103,8 @@ button#goButton:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100%; /* Ensure charts don't exceed container width */
+    max-height: 100%; /* Ensure charts don't exceed container height */
     box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
 }
 
