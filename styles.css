@@ -125,10 +125,3 @@ button#goButton:hover {
     border-radius: 8px;
 }
 
-
-/* Adjust specific pie chart sizes */
-#close_reason_pie, #race_pie, #gender_pie, #age_pie {
-    width: 100%; /* Ensure responsive width */
-    height: 100%; /* Ensure responsive height */
-}
-
