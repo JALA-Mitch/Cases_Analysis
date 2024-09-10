@@ -109,7 +109,7 @@ button#goButton:hover {
 }
 
 #close_reason_pie, #race_pie, #gender_pie, #age_pie {
-    width: 300px; /* Adjust width */
-    height: 300px; /* Adjust height */
+    width: 100%; /* Adjust width */
+    height: 100%; /* Adjust height */
 }
 
