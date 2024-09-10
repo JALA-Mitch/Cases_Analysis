@@ -85,9 +85,8 @@ button#goButton:hover {
 /* Pie Charts Section */
 .pie-charts {
     display: grid;
-    grid-template-rows: 2fr 2fr;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    grid-template-columns: 1fr 1fr; /* Create 2 equal-width columns */
+    grid-template-rows: auto auto; /* Create rows based on content */
     gap: 1.5em; /* Adjust space between pie charts */
     padding: 1em;
 }
@@ -96,9 +95,8 @@ button#goButton:hover {
     background-color: white;
     padding: 1em;
     height: 350px;
-    flex: 1 1 calc(50% - 2em); /* Ensure enough space between pie charts */
-    margin: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
+    width: 100%; /* Ensure responsive width */
 }
 
 /* Statistics Section */
