@@ -71,7 +71,7 @@ button#goButton:hover {
 /* Graphs Section */
 .graphs {
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: auto 1fr;
     gap: 1em;
 }
 
@@ -80,18 +80,20 @@ button#goButton:hover {
     padding: 1em;
 }
 
+/* Updated Pie Charts Layout */
 .pie-charts {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    gap: 1em;
+    justify-content: space-between;
 }
 
 .pie-chart {
     background-color: white;
     padding: 1em;
-    height: 350px;
     flex: 1 1 45%; /* Adjust this to control the width of each chart */
-    margin: 0px;
+    min-width: 300px; /* Ensure charts are not too small */
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 /* Statistics Section */
@@ -109,8 +111,9 @@ button#goButton:hover {
     border-radius: 8px;
 }
 
+/* Pie Chart Specific Sizes */
 #close_reason_pie, #race_pie, #gender_pie, #age_pie {
-    width: 300px; /* Adjust width */
-    height: 300px; /* Adjust height */
+    width: 100%; /* Use full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 300px; /* Optional: Limit maximum width */
 }
-
