@@ -89,9 +89,9 @@ button#goButton:hover {
 .pie-chart {
     background-color: white;
     padding: 1em;
-    height: 350px;
+    height: 300px;
     flex: 1 1 45%; /* Adjust this to control the width of each chart */
-    margin: 20px;
+    margin: 0px;
 }
 
 /* Statistics Section */
