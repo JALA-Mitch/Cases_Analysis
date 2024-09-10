@@ -29,7 +29,6 @@ header {
     height: calc(100vh - 55px);
 }
 
-/* Filters Section */
 .filters {
     background-color: #f9f9f9;
     padding: 1em;
@@ -72,49 +71,34 @@ button#goButton:hover {
 /* Graphs Section */
 .graphs {
     display: grid;
-    grid-template-rows: auto;
-    gap: 1.5em;
-    padding: 1em;
+    grid-template-rows: 1fr 2fr;
+    gap: 1em;
 }
 
-/* Bar Charts Section */
-.bar-charts {
-    display: grid;
-    grid-template-rows: 1fr 1fr; /* Two bar charts stacked vertically */
-    gap: 0.5em; /* Space between bar charts */
-}
-
-/* Pie Charts Section */
-.pie-charts {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns */
-    grid-template-rows: 1fr 1fr; /* Two rows */
-    gap: 1.5em; /* Space between pie charts */
-}
-
-/* General Styles for Bar and Pie Charts */
-.bar-chart, .pie-chart {
+.bar-chart {
     background-color: white;
     padding: 1em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
 }
 
-/* Bar Charts */
-.bar-chart {
-    height: 300px; /* Adjust height as needed */
+.pie-charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-/* Pie Charts */
 .pie-chart {
-    height: 350px; /* Adjust height as needed */
-    width: 100%; /* Ensure responsive width */
+    background-color: white;
+    padding: 1em;
+    height: 350px;
+    flex: 1 1 45%; /* Adjust this to control the width of each chart */
+    margin: 20px;
 }
 
 /* Statistics Section */
 .statistics {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5em;
+    gap: 1em;
 }
 
 .stat {
@@ -123,5 +107,10 @@ button#goButton:hover {
     padding: 1em;
     text-align: center;
     border-radius: 8px;
+}
+
+#close_reason_pie, #race_pie, #gender_pie, #age_pie {
+    width: 300px; /* Adjust width */
+    height: 300px; /* Adjust height */
 }
 

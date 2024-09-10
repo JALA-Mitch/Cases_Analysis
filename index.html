@@ -174,15 +174,14 @@
 
         <!-- Graphs Section -->
         <div class="graphs">
-            <div class="bar-charts">
-                <div class="bar-chart">
-                    <h2>Top Legal Problems</h2>
-                    <canvas id="top_legal_problems_bar"></canvas>
-                </div>
-                <div class="bar-chart">
-                    <h2>Top Special Legal Problems</h2>
-                    <canvas id="special_legal_problem_chart"></canvas>
-                </div>
+            <div class="bar-chart">
+                <h2>Top Legal Problems</h2>
+                <canvas id="top_legal_problems_bar" width="100%" height="30"></canvas>
+            </div>
+            <!-- Add a canvas for Special Legal Problem Code Bar Chart -->
+            <div class="bar-chart">
+                <h2>Top Special Legal Problems</h2>
+                <canvas id="special_legal_problem_chart" width="100%" height="30"></canvas>
             </div>
             <div class="pie-charts">
                 <div class="pie-chart">
@@ -202,7 +201,7 @@
                     <canvas id="age_pie"></canvas>
                 </div>
             </div>
-        </div>        
+        </div>  
     </div>
 
     <script>
@@ -263,7 +262,7 @@
                 }
             });
 
-            // Sort and get top 10 legal problems
+            // Sort and get top legal problems
             const sortedLegalProblems = Object.entries(legalProblemCounts)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 10);
@@ -294,31 +293,39 @@
             });
         }
 
+        // Update Bar Chart (Top Special Legal Problems)
         function updateSpecialLegalProblemBarChart(data) {
             // Destroy the previous instance of the chart if it exists
             if (specialLegalProblemChartInstance) {
                 specialLegalProblemChartInstance.destroy();
             }
 
-            // Get counts for Special Legal Problem Code
-            const specialLegalProblemCounts = getCounts(data, 'Special Legal Problem Code');
+            // Calculate the top special legal problems
+            let specialLegalProblemCounts = {};
 
-            // Sort and get top Special Legal Problem Codes
+            data.forEach(item => {
+                const specialLegalProblem = item['Special Legal Problem Code'];
+                if (specialLegalProblem) {
+                    specialLegalProblemCounts[specialLegalProblem] = (specialLegalProblemCounts[specialLegalProblem] || 0) + 1;
+                }
+            });
+
+            // Sort and get top special legal problems
             const sortedSpecialLegalProblems = Object.entries(specialLegalProblemCounts)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 10);
 
             const labels = sortedSpecialLegalProblems.map(item => item[0]);
-            const chartData = sortedSpecialLegalProblems.map(item => item[1]);
+            const counts = sortedSpecialLegalProblems.map(item => item[1]);
 
             const ctx = document.getElementById('special_legal_problem_chart').getContext('2d');
-            specialLegalProblemChartInstance = new Chart(ctx, {
+            barChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Top Special Legal Problem Codes',
-                        data: chartData,
+                        label: 'Top Special Legal Problems',
+                        data: counts,
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
@@ -329,11 +336,10 @@
                         y: {
                             beginAtZero: true
                         }
-                    },
+                    }
                 }
             });
         }
-
 
         // Update Pie Charts (Close Reason, Race, Gender, Age)
         function updatePieCharts(data) {
