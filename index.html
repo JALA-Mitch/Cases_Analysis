@@ -249,13 +249,16 @@
                 }
             });
 
-            // Sort and get top legal problems
-            const sortedLegalProblems = Object.entries(legalProblemCounts)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 10);
+            const labels = legalProblemCounts.map(item => item[0]);
+            const counts = legalProblemCounts.map(item => item[1]);
 
-            const labels = sortedLegalProblems.map(item => item[0]);
-            const counts = sortedLegalProblems.map(item => item[1]);
+            // Sort and get top legal problems
+            //const sortedLegalProblems = Object.entries(legalProblemCounts)
+                //.sort((a, b) => b[1] - a[1])
+                //.slice(0, 10);
+
+            //const labels = sortedLegalProblems.map(item => item[0]);
+            //const counts = sortedLegalProblems.map(item => item[1]);
 
             const ctx = document.getElementById('top_legal_problems_bar').getContext('2d');
             barChartInstance = new Chart(ctx, {
