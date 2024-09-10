@@ -4,9 +4,11 @@ body {
     background-color: white;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure body takes up at least the full viewport height */
+}
+
+#logo {
+    height: 50px;
+    margin-right: 20px;
 }
 
 header {
@@ -15,28 +17,24 @@ header {
     padding: 1em;
     text-align: center;
     height: 55px;
-    box-sizing: border-box; /* Ensure padding and border are included in height calculation */
+    align-content: center;
 }
 
 .container {
-    display: flex;
-    flex-direction: row;
-    flex: 1; /* Allows the container to grow and shrink as needed */
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto 1fr auto;
+    gap: 1em;
     margin: 1em;
-    box-sizing: border-box; /* Ensure padding and border are included in width calculation */
+    height: calc(100vh - 55px);
 }
 
-/* Filters Section */
 .filters {
-    width: 20%;
     background-color: #f9f9f9;
     padding: 1em;
     border-radius: 8px;
-    box-sizing: border-box; /* Ensure padding and border are included in width calculation */
-    overflow-y: auto; /* Adds vertical scrolling if content exceeds container size */
 }
 
-/* Filters Heading */
 .filters h2 {
     margin-bottom: 1em;
 }
@@ -70,51 +68,43 @@ button#goButton:hover {
     background-color: #005fa3;
 }
 
-/* Main Content Layout */
-.main-content {
-    width: 80%; /* Adjusted to fit alongside filters */
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box; /* Ensure padding and border are included in width calculation */
+/* Graphs Section */
+.graphs {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    gap: 1em;
 }
 
-/* Bar Chart Section */
+/* Bar Chart */
 .bar-chart {
     background-color: white;
     padding: 1em;
-    margin-bottom: 1em; /* Space below the bar chart */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
 }
 
 /* Pie Charts Section */
 .pie-charts {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    grid-template-rows: repeat(2, 1fr); /* Two rows */
-    gap: 1em;
-    margin-top: 1em; /* Space above the pie charts */
-    box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
-    height: auto; /* Allow height to grow based on content */
-    overflow: hidden; /* Hide overflow to prevent scroll bars */
+    grid-template-columns: 1fr 1fr; /* Create 2 equal-width columns */
+    grid-template-rows: auto auto; /* Create rows based on content */
+    gap: 1.5em; /* Adjust space between pie charts */
+    padding: 1em;
 }
 
 .pie-chart {
     background-color: white;
     padding: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 100%; /* Ensure charts don't exceed container width */
-    max-height: 100%; /* Ensure charts don't exceed container height */
-    box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
+    height: 350px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
+    width: 100%; /* Ensure responsive width */
 }
 
 /* Statistics Section */
 .statistics {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1em;
-    margin-top: 1em; /* Space above statistics */
-    box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
+    gap: 1.5em;
 }
 
 .stat {
@@ -123,4 +113,10 @@ button#goButton:hover {
     padding: 1em;
     text-align: center;
     border-radius: 8px;
+}
+
+/* Adjust specific pie chart sizes */
+#close_reason_pie, #race_pie, #gender_pie, #age_pie {
+    width: 100%; /* Ensure responsive width */
+    height: 100%; /* Ensure responsive height */
 }
