@@ -4,11 +4,9 @@ body {
     background-color: white;
     margin: 0;
     padding: 0;
-}
-
-#logo {
-    height: 50px;
-    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
 }
 
 header {
@@ -17,39 +15,80 @@ header {
     padding: 1em;
     text-align: center;
     height: 55px;
-    align-content: center;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 20% 80%;
-    grid-template-rows: auto 1fr auto;
-    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Allows the container to grow and shrink as needed */
     margin: 1em;
-    height: calc(100vh - 55px);
-    overflow-y: auto; /* Allow vertical scrolling if content overflows */
 }
 
-/* Adjust Grid Layout for Graphs and Statistics */
+.main-content {
+    display: flex;
+    flex: 1; /* Allows main content to expand and fill available space */
+    overflow: auto; /* Adds scrolling if content exceeds container size */
+}
+
+.filters {
+    width: 20%;
+    background-color: #f9f9f9;
+    padding: 1em;
+    border-radius: 8px;
+}
+
+.filters h2 {
+    margin-bottom: 1em;
+}
+
+.filter-group {
+    margin-bottom: 1em;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button#goButton {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 0.7em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button#goButton:hover {
+    background-color: #005fa3;
+}
+
+/* Main Content Layout */
 .graphs {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    width: 80%; /* Adjusted to fit alongside filters */
 }
 
 .bar-chart {
     background-color: white;
     padding: 1em;
+    flex: 1; /* Allows the bar chart to grow and shrink as needed */
 }
 
-/* Pie Charts Section */
 .pie-charts {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns */
     grid-template-rows: repeat(2, 1fr); /* Two rows */
-    gap: 1em; /* Space between charts */
-    max-height: 700px; /* Limit the height of the container */
-    overflow: hidden; /* Hide any overflow to prevent expansion */
+    gap: 1em;
+    margin-top: 1em; /* Space above the pie charts */
 }
 
 .pie-chart {
@@ -58,8 +97,6 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Full height of its grid cell */
-    width: 100%; /* Full width of its grid cell */
 }
 
 /* Statistics Section */
@@ -67,6 +104,7 @@ header {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1em;
+    margin-top: 1em; /* Space above statistics */
 }
 
 .stat {
@@ -75,10 +113,4 @@ header {
     padding: 1em;
     text-align: center;
     border-radius: 8px;
-}
-
-/* Pie Chart Specific Sizes */
-#close_reason_pie, #race_pie, #gender_pie, #age_pie {
-    width: 100%; /* Use full width of the container */
-    height: 100%; /* Use full height of the container */
 }
