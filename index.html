@@ -302,23 +302,21 @@
             // Get counts for Special Legal Problem Code
             const specialLegalProblemCounts = getCounts(data, 'Special Legal Problem Code');
 
-            // Sort and get top 10 Special Legal Problem Codes
+            // Sort and get top Special Legal Problem Codes
             const sortedSpecialLegalProblems = Object.entries(specialLegalProblemCounts)
-                .sort((a, b) => b[1] - a[1]) // Sort by count in descending order
-                .slice(0, 10); // Take the top 10
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
 
-            // Prepare labels and data for the chart
             const labels = sortedSpecialLegalProblems.map(item => item[0]);
             const chartData = sortedSpecialLegalProblems.map(item => item[1]);
 
-            // Create the new bar chart
             const ctx = document.getElementById('special_legal_problem_chart').getContext('2d');
             specialLegalProblemChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Top 10 Special Legal Problem Codes',
+                        label: 'Top Special Legal Problem Codes',
                         data: chartData,
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',

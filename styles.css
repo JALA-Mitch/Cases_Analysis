@@ -71,34 +71,40 @@ button#goButton:hover {
 /* Graphs Section */
 .graphs {
     display: grid;
-    grid-template-rows: 1fr 2fr;
-    gap: 1em;
+    grid-template-rows: auto 1fr;
+    gap: 2em; /* Add more gap between bar chart and pie charts */
 }
 
+/* Bar Chart */
 .bar-chart {
     background-color: white;
     padding: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
 }
 
+/* Pie Charts Section */
 .pie-charts {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    gap: 1.5em; /* Adjust space between pie charts */
+    padding: 1em;
 }
 
 .pie-chart {
     background-color: white;
     padding: 1em;
     height: 350px;
-    flex: 1 1 45%; /* Adjust this to control the width of each chart */
-    margin: 20px;
+    flex: 1 1 calc(50% - 2em); /* Ensure enough space between pie charts */
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for visual clarity */
 }
 
 /* Statistics Section */
 .statistics {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1em;
+    gap: 1.5em;
 }
 
 .stat {
@@ -109,8 +115,9 @@ button#goButton:hover {
     border-radius: 8px;
 }
 
+/* Adjust specific pie chart sizes */
 #close_reason_pie, #race_pie, #gender_pie, #age_pie {
-    width: 300px; /* Adjust width */
-    height: 300px; /* Adjust height */
+    width: 100%; /* Ensure responsive width */
+    height: 100%; /* Ensure responsive height */
 }
 
