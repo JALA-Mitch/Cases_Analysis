@@ -72,7 +72,7 @@ button#goButton:hover {
 .graphs {
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 2em; /* Add more gap between bar chart and pie charts */
+    gap: 1em;
 }
 
 /* Bar Chart */
@@ -84,7 +84,8 @@ button#goButton:hover {
 
 /* Pie Charts Section */
 .pie-charts {
-    display: flex;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 1.5em; /* Adjust space between pie charts */
