@@ -29,6 +29,7 @@ header {
     height: calc(100vh - 55px);
 }
 
+/* Filters Section */
 .filters {
     background-color: #f9f9f9;
     padding: 1em;
@@ -71,12 +72,12 @@ button#goButton:hover {
 /* Graphs Section */
 .graphs {
     display: grid;
-    grid-template-rows: auto auto; /* Two rows: one for bar charts, one for pie charts */
-    gap: 1.5em; /* Adjust space between rows */
+    grid-template-rows: auto 1fr; /* Two rows: one for bar charts and one for pie charts */
+    gap: 1.5em; /* Space between bar charts and pie charts */
     padding: 1em;
 }
 
-/* Bar Chart Section */
+/* Bar Charts Section */
 .bar-charts {
     display: grid;
     grid-template-rows: 1fr 1fr; /* Two bar charts stacked vertically */
@@ -86,10 +87,9 @@ button#goButton:hover {
 /* Pie Charts Section */
 .pie-charts {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Create 2 equal-width columns */
-    grid-template-rows: 1fr 1fr; /* Create 2 equal-height rows */
-    gap: 1.5em; /* Adjust space between pie charts */
-    padding: 1em;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    grid-template-rows: 1fr 1fr; /* Two rows */
+    gap: 1.5em; /* Space between pie charts */
 }
 
 /* General Styles for Bar and Pie Charts */
@@ -124,3 +124,11 @@ button#goButton:hover {
     text-align: center;
     border-radius: 8px;
 }
+
+
+/* Adjust specific pie chart sizes */
+#close_reason_pie, #race_pie, #gender_pie, #age_pie {
+    width: 100%; /* Ensure responsive width */
+    height: 100%; /* Ensure responsive height */
+}
+
