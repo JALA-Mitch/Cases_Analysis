@@ -83,9 +83,7 @@ button#goButton:hover {
 /* Updated Pie Charts Layout */
 .pie-charts {
     display: flex;
-    flex-wrap: wrap;
     gap: 1em;
-    justify-content: space-between;
 }
 
 .pie-chart {
