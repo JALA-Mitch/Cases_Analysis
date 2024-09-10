@@ -319,7 +319,7 @@
             const counts = sortedSpecialLegalProblems.map(item => item[1]);
 
             const ctx = document.getElementById('special_legal_problem_chart').getContext('2d');
-            barChartInstance = new Chart(ctx, {
+            specialLegalProblemChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
