@@ -82,6 +82,7 @@ button#goButton:hover {
 
 .pie-charts {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .pie-chart {
@@ -109,6 +110,6 @@ button#goButton:hover {
 
 #close_reason_pie, #race_pie, #gender_pie, #age_pie {
     width: 100%; /* Adjust width */
-    height: 300px; /* Adjust height */
+    height: 100%; /* Adjust height */
 }
 
