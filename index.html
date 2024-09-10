@@ -177,9 +177,6 @@
             <div class="bar-chart">
                 <h2>Top Legal Problems</h2>
                 <canvas id="top_legal_problems_bar" width="100%" height="30"></canvas>
-            </div>
-            <!-- Add a canvas for Special Legal Problem Code Bar Chart -->
-            <div class="bar-chart">
                 <h2>Top Special Legal Problems</h2>
                 <canvas id="special_legal_problem_chart" width="100%" height="30"></canvas>
             </div>
@@ -276,7 +273,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Top Legal Problems',
+                        label: 'Legal Problem Count',
                         data: counts,
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
@@ -324,7 +321,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Top Special Legal Problems',
+                        label: 'Special Legal Problem Counts',
                         data: counts,
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
