@@ -249,9 +249,12 @@
                 }
             });
 
-            // Sort and get top legal problems
+            // Calculate the total number of cases
+            const totalCases = data.length;
+
+            // Sort and get legal problems
             const sortedLegalProblems = Object.entries(legalProblemCounts)
-                .sort((a, b) => b[1] - a[1])
+                .sort((a, b) => b[1] - a[1]);
 
             const labels = sortedLegalProblems.map(item => item[0]);
             const counts = sortedLegalProblems.map(item => item[1]);
@@ -274,6 +277,18 @@
                         y: {
                             beginAtZero: true
                         }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    // Get the count and calculate the percentage
+                                    const count = counts[tooltipItem.dataIndex];
+                                    const percentage = ((count / totalCases) * 100).toFixed(2);
+                                    return `${tooltipItem.label}: ${count} cases (${percentage}%)`;
+                                }
+                            }
+                        }
                     }
                 }
             });
@@ -281,7 +296,7 @@
 
         // Update Bar Chart (Top Special Legal Problems)
         function updateSpecialLegalProblemBarChart(data) {
-            // Destroy the previous instance of the chart if it exists
+            // Destroy the previous chart instance if it exists
             if (specialLegalProblemChartInstance) {
                 specialLegalProblemChartInstance.destroy();
             }
@@ -296,9 +311,12 @@
                 }
             });
 
-            // Sort and get top special legal problems
+            // Calculate the total number of cases
+            const totalCases = data.length;
+
+            // Sort and get special legal problems
             const sortedSpecialLegalProblems = Object.entries(specialLegalProblemCounts)
-                .sort((a, b) => b[1] - a[1])
+                .sort((a, b) => b[1] - a[1]);
 
             const labels = sortedSpecialLegalProblems.map(item => item[0]);
             const counts = sortedSpecialLegalProblems.map(item => item[1]);
@@ -321,10 +339,23 @@
                         y: {
                             beginAtZero: true
                         }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    // Get the count and calculate the percentage
+                                    const count = counts[tooltipItem.dataIndex];
+                                    const percentage = ((count / totalCases) * 100).toFixed(2);
+                                    return `${tooltipItem.label}: ${count} cases (${percentage}%)`;
+                                }
+                            }
+                        }
                     }
                 }
             });
         }
+
 
         // Update Pie Charts (Close Reason, Race, Gender, Age)
         function updatePieCharts(data) {
