@@ -6,6 +6,7 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
+    min-height: 100vh; /* Ensure body takes up at least the full viewport height */
 }
 
 header {
@@ -14,19 +15,15 @@ header {
     padding: 1em;
     text-align: center;
     height: 55px;
+    box-sizing: border-box; /* Ensure padding and border are included in height calculation */
 }
 
 .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 1; /* Allows the container to grow and shrink as needed */
     margin: 1em;
-}
-
-.main-content {
-    display: flex;
-    flex: 1; /* Allows main content to expand and fill available space */
-    overflow: auto; /* Adds scrolling if content exceeds container size */
+    box-sizing: border-box; /* Ensure padding and border are included in width calculation */
 }
 
 .filters {
@@ -34,6 +31,7 @@ header {
     background-color: #f9f9f9;
     padding: 1em;
     border-radius: 8px;
+    box-sizing: border-box; /* Ensure padding and border are included in width calculation */
 }
 
 .filters h2 {
@@ -70,24 +68,30 @@ button#goButton:hover {
 }
 
 /* Main Content Layout */
-.graphs {
+.main-content {
+    width: 80%; /* Adjusted to fit alongside filters */
     display: flex;
     flex-direction: column;
-    width: 80%; /* Adjusted to fit alongside filters */
+    box-sizing: border-box; /* Ensure padding and border are included in width calculation */
 }
 
+/* Bar Chart Section */
 .bar-chart {
     background-color: white;
     padding: 1em;
-    flex: 1; /* Allows the bar chart to grow and shrink as needed */
+    margin-bottom: 1em; /* Space below the bar chart */
 }
 
+/* Pie Charts Section */
 .pie-charts {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns */
     grid-template-rows: repeat(2, 1fr); /* Two rows */
     gap: 1em;
     margin-top: 1em; /* Space above the pie charts */
+    box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
+    height: 600px; /* Fixed height for the pie charts section */
+    overflow: auto; /* Allows scrolling if pie charts exceed container height */
 }
 
 .pie-chart {
@@ -96,6 +100,7 @@ button#goButton:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
 }
 
 /* Statistics Section */
@@ -104,6 +109,7 @@ button#goButton:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 1em;
     margin-top: 1em; /* Space above statistics */
+    box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
 }
 
 .stat {
