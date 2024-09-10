@@ -27,49 +27,10 @@ header {
     gap: 1em;
     margin: 1em;
     height: calc(100vh - 55px);
-    overflow: hidden; /* Hide overflow to prevent page expansion */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
 }
 
-.filters {
-    background-color: #f9f9f9;
-    padding: 1em;
-    border-radius: 8px;
-}
-
-.filters h2 {
-    margin-bottom: 1em;
-}
-
-.filter-group {
-    margin-bottom: 1em;
-}
-
-.filter-group label {
-    display: block;
-    margin-bottom: 0.5em;
-}
-
-.filter-group select {
-    width: 100%;
-    padding: 0.5em;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-button#goButton {
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    padding: 0.7em;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button#goButton:hover {
-    background-color: #005fa3;
-}
-
-/* Graphs Section */
+/* Adjust Grid Layout for Graphs and Statistics */
 .graphs {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -89,7 +50,6 @@ button#goButton:hover {
     gap: 1em; /* Space between charts */
     max-height: 700px; /* Limit the height of the container */
     overflow: hidden; /* Hide any overflow to prevent expansion */
-    position: relative; /* Contain absolute children */
 }
 
 .pie-chart {
@@ -98,7 +58,6 @@ button#goButton:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Ensure no overflow inside the chart */
     height: 100%; /* Full height of its grid cell */
     width: 100%; /* Full width of its grid cell */
 }
