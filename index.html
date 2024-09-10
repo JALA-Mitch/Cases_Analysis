@@ -169,7 +169,7 @@
             <br><br><br><br>
             <br><br><br><br>
             </div>
-            <div><h4>Data derived from Closed Cases - By Closing Reason Report on Legal Server</h4></div>
+            <div><h4>Data derived from Cases Report - General Analysis on Legal Server</h4></div>
         </div>
 
         <!-- Graphs Section -->
@@ -177,6 +177,11 @@
             <div class="bar-chart">
                 <h2>Top Legal Problems</h2>
                 <canvas id="top_legal_problems_bar" width="100%" height="30"></canvas>
+            </div>
+            <!-- Add a canvas for Special Legal Problem Code Bar Chart -->
+            <div class="bar-chart">
+                <h2>Top Special Legal Problems</h2>
+                <canvas id="special_legal_problem_chart" width="100%" height="30"></canvas>
             </div>
             <div class="pie-charts">
                 <div class="pie-chart">
@@ -234,6 +239,7 @@
 
             // Update charts with the filtered data
             updateBarChart(filteredData);
+            updateSpecialLegalProblemBarChart(filteredData);
             updatePieCharts(filteredData);
             updateStatistics(filteredData);
         }
@@ -286,6 +292,51 @@
             });
         }
 
+        function updateSpecialLegalProblemBarChart(data) {
+            // Destroy the previous instance of the chart if it exists
+            if (specialLegalProblemChartInstance) {
+                specialLegalProblemChartInstance.destroy();
+            }
+
+            // Get counts for Special Legal Problem Code
+            const specialLegalProblemCounts = getCounts(data, 'Special Legal Problem Code');
+
+            // Sort and get top 10 Special Legal Problem Codes
+            const sortedSpecialLegalProblems = Object.entries(specialLegalProblemCounts)
+                .sort((a, b) => b[1] - a[1]) // Sort by count in descending order
+                .slice(0, 10); // Take the top 10
+
+            // Prepare labels and data for the chart
+            const labels = sortedSpecialLegalProblems.map(item => item[0]);
+            const chartData = sortedSpecialLegalProblems.map(item => item[1]);
+
+            // Create the new bar chart
+            const ctx = document.getElementById('special_legal_problem_chart').getContext('2d');
+            specialLegalProblemChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Top 10 Special Legal Problem Codes',
+                        data: chartData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+
         // Update Pie Charts (Close Reason, Race, Gender, Age)
         function updatePieCharts(data) {
             // Destroy the previous pie chart instances if they exist
@@ -309,7 +360,7 @@
             createPieChart('age_pie', ageGroupCounts, 'Age at Intake');
         }
 
-        // Helper function to sort counts by value (descending order)
+        // Function to sort counts by value (descending order)
         function sortCountsByValue(counts) {
             const sorted = Object.entries(counts)
                 .sort((a, b) => b[1] - a[1]) // Sort by value in descending order
