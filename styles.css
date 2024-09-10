@@ -70,7 +70,9 @@ button#goButton:hover {
 
 /* Graphs Section */
 .graphs {
-    display: flex;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
     gap: 1em;
 }
 
