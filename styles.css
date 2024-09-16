@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    height: 2500px;
+}
+
+#logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+header {
+    background-color: #0077cc;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    height: 55px;
+    align-content: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 20% 80%; /* Left: 20%, Right: 80% */
+    gap: 1em;
+    margin: 1em;
+    height: 2500px
+}
+
+.filters {
+    background-color: #f9f9f9;
+    padding: 1em;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.filters h2 {
+    margin-bottom: 1em;
+}
+
+.filter-group {
+    margin-bottom: 1em;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button#goButton {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 0.7em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button#goButton:hover {
+    background-color: #005fa3;
+}
+
+/* Graphs Section */
+.graphs {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    gap: 0em;
+}
+
+.bar-chart {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 1em;
+    padding: 1em;
+    height: 1600px;
+}
+
+.bar-chart canvas {
+    width: 85%;
+    height: 100%;
+}
+
+.pie-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4em;
+    padding: 1em;
+}
+
+.pie-chart {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 1em;
+    height: 80%;
+}
+
+/* Statistics Section */
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+
+.stat {
+    background-color: #0077cc;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    border-radius: 8px;
+}

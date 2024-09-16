@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" id="logo">
+    </header>
+    <div class="container">
+        <!-- Filters Section -->
+        <div class="filters">
+            <h3>Change the Filters and Click "Go" to Update Data & Visuals</h3>
+            <div class="filter-group">
+                <label for="year">Year</label>
+                <select id="year">
+                    <option value="all" selected>All Years</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="program">Program</label>
+                <select id="program">
+                    <option value="all" selected>All Programs</option>
+                    <option value="Baker Defense Project">Baker Defense Project</option>
+                    <option value="Community Development">Community Development</option>
+                    <option value="Consumer Law">Consumer Law</option>
+                    <option value="Deaf/Hard-of-Hearing">Deaf/Hard-of-Hearing</option>
+                    <option value="Education Law">Education Law</option>
+                    <option value="Elder Law">Elder Law</option>
+                    <option value="Employment Law">Employment Law</option>
+                    <option value="Fair Housing">Fair Housing</option>
+                    <option value="Family Law">Family Law</option>
+                    <option value="FLARE">FLARE</option>
+                    <option value="General">General</option>
+                    <option value="Housing Law">Housing Law</option>
+                    <option value="Immigration Law">Immigration Law</option>
+                    <option value="Intake Dept">Intake Dept</option>
+                    <option value="Mental Health">Mental Health</option>
+                    <option value="NFMLP">NFMLP</option>
+                    <option value="PAI Compensated">PAI Compensated</option>
+                    <option value="Prisoner Re-Entry">Prisoner Re-Entry</option>
+                    <option value="Pro Bono">Pro Bono</option>
+                    <option value="Ryan White">Ryan White</option>
+                    <option value="Social Security">Social Security</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Veterans Unit">Veterans Unit</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="funding-code">Funding Code</label>
+                <select id="funding-code">
+                    <option value="all" selected>All Funding Codes</option>
+                    <option value="01 LSC">01 LSC</option>
+                    <option value="05 HancockWhitney/HPRP">05 HancockWhitney/HPRP</option>
+                    <option value="06 CDP COVID Response Fund">06 CDP COVID Response Fund</option>
+                    <option value="11 Fla Bar Children's Grant">11 Fla Bar Children's Grant</option>
+                    <option value="12 United Way">12 United Way</option>
+                    <option value="13 LTC Ombudsman Program">13 LTC Ombudsman Program</option>
+                    <option value="14 IOTA">14 IOTA</option>
+                    <option value="15 State CLA">15 State CLA</option>
+                    <option value="16 Title IIIB">16 Title IIIB</option>
+                    <option value="17 Title IIIE Family Caregiver">17 Title IIIE Family Caregiver</option>
+                    <option value="18 COJ PSG for Homeless">18 COJ PSG for Homeless</option>
+                    <option value="19 COJ Foreclosure Mitigation">19 COJ Foreclosure Mitigation</option>
+                    <option value="20 Ryan White">20 Ryan White</option>
+                    <option value="21 FH MRC EOI">21 FH MRC EOI</option>
+                    <option value="22 Fair Housing">22 Fair Housing</option>
+                    <option value="23 FH MRC PEI">23 FH MRC PEI</option>
+                    <option value="24 Hospital Project">24 Hospital Project</option>
+                    <option value="26 City PSG - Financial Stability">26 City PSG - Financial Stability</option>
+                    <option value="28 COJ Critical Quality of Life">28 COJ Critical Quality of Life</option>
+                    <option value="30 HUD Comp Hsg Couns">30 HUD Comp Hsg Couns</option>
+                    <option value="31 UW SJC ARPA/HUD PL & LM">31 UW SJC ARPA/HUD PL & LM</option>
+                    <option value="32 COJ SHIP Grant">32 COJ SHIP Grant</option>
+                    <option value="33 Clay SHIP Grant/ARC">33 Clay SHIP Grant/ARC</option>
+                    <option value="34 HUD Eviction Protection/FHFC/JBA">34 HUD Eviction Protection/FHFC/JBA</option>
+                    <option value="35 FBF Citi/LSGMI">35 FBF Citi/LSGMI</option>
+                    <option value="36 NFDM/Project Reinvest/NFMC">36 NFDM/Project Reinvest/NFMC</option>
+                    <option value="37  Wells Fargo / IFLA">37  Wells Fargo / IFLA</option>
+                    <option value="38 NTAPP Consumer/Chase">38 NTAPP Consumer/Chase</option>
+                    <option value="39 BOA Foreclosure Defense">39 BOA Foreclosure Defense</option>
+                    <option value="40 General">40 General</option>
+                    <option value="41 IOTA Pro Bono">41 IOTA Pro Bono</option>
+                    <option value="42 LSC ineligible PAI">42 LSC ineligible PAI</option>
+                    <option value="46 Clay VAWA-CLA Direct">46 Clay VAWA-CLA Direct</option>
+                    <option value="48 VA LSHAV">48 VA LSHAV</option>
+                    <option value="49 FLVH/Braive">49 FLVH/Braive</option>
+                    <option value="54 BLES Grant">54 BLES Grant</option>
+                    <option value="55 NFMC Legal Assistance">55 NFMC Legal Assistance</option>
+                    <option value="60 COJ HPR/FBF HSW/CDBG FH">60 COJ HPR/FBF HSW/CDBG FH</option>
+                    <option value="61 FBF - Engle">61 FBF - Engle</option>
+                    <option value="62 FBA - LAP">62 FBA - LAP</option>
+                    <option value="63 LISC/FBF Seal/Expunge">63 LISC/FBF Seal/Expunge</option>
+                    <option value="64 STOP">64 STOP</option>
+                    <option value="65 City JAG Ex-offenders Project">65 City JAG Ex-offenders Project</option>
+                    <option value="67 Family Foundations">67 Family Foundations</option>
+                    <option value="68 Mark to Market">68 Mark to Market</option>
+                    <option value="69 City Ex-Offenders">69 City Ex-Offenders</option>
+                    <option value="71 CareerSource Project">71 CareerSource Project</option>
+                    <option value="72 IRS Project">72 IRS Project</option>
+                    <option value="73 Youth in Crisis">73 Youth in Crisis</option>
+                    <option value="74 Mental Health Proj.">74 Mental Health Proj.</option>
+                    <option value="75 COJ PSG Disability Rights">75 COJ PSG Disability Rights</option>
+                    <option value="76 State Refugee Proj.">76 State Refugee Proj.</option>
+                    <option value="77 FBF Wealth Building / Low Bono">77 FBF Wealth Building / Low Bono</option>
+                    <option value="78 CLINIC Family Reunification">78 CLINIC Family Reunification</option>
+                    <option value="79 TCF Hsg Clinic/FBF PB/FBF Med">79 TCF Hsg Clinic/FBF PB/FBF Med</option>
+                    <option value="80 Family Law Unbundled">80 Family Law Unbundled</option>
+                    <option value="81 VAWA Stimulus">81 VAWA Stimulus</option>
+                    <option value="82 VOCA">82 VOCA</option>
+                    <option value="83 LAV Grant">83 LAV Grant</option>
+                    <option value="84 Lazarus /Immigrant">84 Lazarus /Immigrant</option>
+                    <option value="85  STJ CDBG / INVEST">85  STJ CDBG / INVEST</option>
+                    <option value="86 VAWA/STOP">86 VAWA/STOP</option>
+                    <option value="87 Violence Against Women/Match">87 Violence Against Women/Match</option>
+                    <option value="88 CDBG Comm Dev">88 CDBG Comm Dev</option>
+                    <option value="89 VOCA-STJ/Old ARRA">89 VOCA-STJ/Old ARRA</option>
+                    <option value="94 PI Referral">94 PI Referral</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="intake-office">Intake Office</label>
+                <select id="intake-office">
+                    <option value="all" selected>All Offices</option>
+                    <option value="Adams Street">Adams Street</option>
+                    <option value="Clay County">Clay County</option>
+                    <option value="Saint Johns">Saint Johns</option>
+                </select>
+            </div>
+            <button id="goButton" onclick="updateCharts()">Go</button>
+            <div>
+            <br><br>
+            <!-- Statistics Section -->
+            <div class="statistics">
+                <div class="stat">
+                    <h2>Total Closed Cases</h2>
+                    <p id="totalCases">0</p>
+                </div>
+                <div class="stat">
+                    <h2>Total People Helped</h2>
+                    <p id="totalPeopleHelped">0</p>
+                </div>
+            </div>
+            <br>
+            </div>
+            <div><h4>Data derived from Cases Report - General Analysis on Legal Server</h4></div>
+        </div>
+
+        <!-- Graphs Section -->
+        <div class="graphs">
+            <div class="bar-chart">
+                <h2>Top Legal Problems</h2>
+                <canvas id="top_legal_problems_bar"></canvas>
+                <h2>Top Special Legal Problems</h2>
+                <canvas id="special_legal_problem_chart"></canvas>
+            </div>
+            
+            <!-- Adding a spacer between bar charts and pie charts -->
+            <div style="height: 30px;"></div>
+            
+            <div class="pie-charts">
+                <div class="pie-chart">
+                    <h2>Case Close Reasons</h2>
+                    <canvas id="close_reason_pie"></canvas>
+                </div>
+                <div class="pie-chart">
+                    <h2>Race Splits</h2>
+                    <canvas id="race_pie"></canvas>
+                </div>
+                <div class="pie-chart">
+                    <h2>Gender Splits</h2>
+                    <canvas id="gender_pie"></canvas>
+                </div>
+                <div class="pie-chart">
+                    <h2>Age Groups</h2>
+                    <canvas id="age_pie"></canvas>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <script>
+        let allData = [];
+        let barChartInstance = null; // Store the instance of the bar chart
+        let specialLegalProblemChartInstance = null; // Store the instance of the special legal problem chart
+        let pieChartInstances = {};  // Store the instances of the pie charts
+
+        // Load the JSON data
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                allData = data;
+                updateCharts(); // Initialize the charts on page load
+            });
+
+        function updateCharts() {
+            // Get the selected values from filters
+            const selectedYear = document.getElementById('year').value;
+            const selectedProgram = document.getElementById('program').value;
+            const selectedFundingCode = document.getElementById('funding-code').value;
+            const selectedIntakeOffice = document.getElementById('intake-office').value;
+
+            // Filter data based on selected filters
+            let filteredData = allData.filter(item => {
+                // Year filter
+                const yearMatch = selectedYear === 'all' || item['Year Closed'] == selectedYear;
+                // Program filter
+                const programMatch = selectedProgram === 'all' || item['Program Name'] === selectedProgram;
+                // Funding Code filter
+                const fundingCodeMatch = selectedFundingCode === 'all' || item['Funding Code(s)'] === selectedFundingCode;
+                // Program filter
+                const intakeOfficeMatch = selectedIntakeOffice === 'all' || item['Office Name'] === selectedIntakeOffice;
+
+                return yearMatch && programMatch && fundingCodeMatch && intakeOfficeMatch;
+            });
+
+            // Update charts with the filtered data
+            updateBarChart(filteredData);
+            updateSpecialLegalProblemBarChart(filteredData);
+            updatePieCharts(filteredData);
+            updateStatistics(filteredData);
+        }
+
+        // Update Bar Chart (Top Legal Problems)
+        function updateBarChart(data) {
+            // Destroy the previous chart instance if it exists
+            if (barChartInstance) {
+                barChartInstance.destroy();
+            }
+
+            // Calculate the top legal problems
+            let legalProblemCounts = {};
+
+            data.forEach(item => {
+                const legalProblem = item['Legal Problem'];
+                if (legalProblem) {
+                    legalProblemCounts[legalProblem] = (legalProblemCounts[legalProblem] || 0) + 1;
+                }
+            });
+
+            // Calculate the total number of cases
+            const totalCases = data.length;
+
+            // Sort and get legal problems
+            const sortedLegalProblems = Object.entries(legalProblemCounts)
+                .sort((a, b) => b[1] - a[1]);
+
+            const labels = sortedLegalProblems.map(item => item[0]);
+            const counts = sortedLegalProblems.map(item => item[1]);
+
+            const ctx = document.getElementById('top_legal_problems_bar').getContext('2d');
+            barChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Legal Problem Count',
+                        data: counts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    // Get the count and calculate the percentage
+                                    const count = counts[tooltipItem.dataIndex];
+                                    const percentage = ((count / totalCases) * 100).toFixed(2);
+                                    return `${tooltipItem.label}: ${count} cases (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update Bar Chart (Top Special Legal Problems)
+        function updateSpecialLegalProblemBarChart(data) {
+            // Destroy the previous chart instance if it exists
+            if (specialLegalProblemChartInstance) {
+                specialLegalProblemChartInstance.destroy();
+            }
+
+            // Calculate the top special legal problems
+            let specialLegalProblemCounts = {};
+
+            data.forEach(item => {
+                const specialLegalProblem = item['Special Legal Problem Code'];
+                if (specialLegalProblem) {
+                    specialLegalProblemCounts[specialLegalProblem] = (specialLegalProblemCounts[specialLegalProblem] || 0) + 1;
+                }
+            });
+
+            // Calculate the total number of cases
+            const totalCases = data.length;
+
+            // Sort and get special legal problems
+            const sortedSpecialLegalProblems = Object.entries(specialLegalProblemCounts)
+                .sort((a, b) => b[1] - a[1]);
+
+            const labels = sortedSpecialLegalProblems.map(item => item[0]);
+            const counts = sortedSpecialLegalProblems.map(item => item[1]);
+
+            const ctx = document.getElementById('special_legal_problem_chart').getContext('2d');
+            specialLegalProblemChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Special Legal Problem Count',
+                        data: counts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    // Get the count and calculate the percentage
+                                    const count = counts[tooltipItem.dataIndex];
+                                    const percentage = ((count / totalCases) * 100).toFixed(2);
+                                    return `${tooltipItem.label}: ${count} cases (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+        // Update Pie Charts (Close Reason, Race, Gender, Age)
+        function updatePieCharts(data) {
+            // Destroy the previous pie chart instances if they exist
+            const pieChartIds = ['close_reason_pie', 'race_pie', 'gender_pie', 'age_pie'];
+            pieChartIds.forEach(id => {
+                if (pieChartInstances[id]) {
+                    pieChartInstances[id].destroy();
+                }
+            });
+
+            // Calculate counts for each category
+            const closeReasonCounts = sortCountsByValue(getCounts(data, 'Case Close Reason'));
+            const raceCounts = sortCountsByValue(getCounts(data, 'Race'));
+            const genderCounts = sortCountsByValue(getCounts(data, 'Gender'));
+            const ageGroupCounts = sortCountsByValue(getCounts(data, 'Age Group'));
+
+            // Update the pie charts
+            createPieChart('close_reason_pie', closeReasonCounts, 'Case Close Reason');
+            createPieChart('race_pie', raceCounts, 'Race');
+            createPieChart('gender_pie', genderCounts, 'Gender');
+            createPieChart('age_pie', ageGroupCounts, 'Age at Intake');
+        }
+
+        // Function to sort counts by value (descending order)
+        function sortCountsByValue(counts) {
+            const sorted = Object.entries(counts)
+                .sort((a, b) => b[1] - a[1]) // Sort by value in descending order
+                .reduce((acc, [key, value]) => {
+                    acc[key] = value;
+                    return acc;
+                }, {});
+            return sorted;
+        }
+
+        function getCounts(data, key) {
+            const counts = {};
+            data.forEach(item => {
+                const value = item[key];
+                if (value) {
+                    counts[value] = (counts[value] || 0) + 1;
+                }
+            });
+            return counts;
+        }
+
+        function createPieChart(canvasId, dataCounts, label) {
+            // Sort dataCounts by value
+            const sortedEntries = Object.entries(dataCounts).sort((a, b) => b[1] - a[1]);
+            const topEntries = sortedEntries.slice(0, 8);
+
+            // Extract labels and data
+            const labels = topEntries.map(entry => entry[0]); // Get labels for top 8 slices
+            const data = sortedEntries.map(entry => entry[1]);
+
+            // Calculate total count for percentage calculation
+            const total = data.reduce((sum, value) => sum + value, 0);
+
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            pieChartInstances[canvasId] = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels, // Use all labels
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                generateLabels: function(chart) {
+                                    // Show labels only for the top 10 entries
+                                    return chart.data.labels.slice(0, 10).map((label, index) => {
+                                        const dataset = chart.data.datasets[0];
+                                        return {
+                                            text: label,
+                                            fillStyle: dataset.backgroundColor[index],
+                                            strokeStyle: dataset.borderColor[index],
+                                            lineWidth: dataset.borderWidth,
+                                            hidden: isNaN(dataset.data[index]) || dataset.data[index] === null,
+                                            index: index
+                                        };
+                                    });
+                                },
+                                padding: 20 // Increase this if labels overlap with the edges
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const count = tooltipItem.raw; // Get the count
+                                    const percentage = ((count / total) * 100).toFixed(2); // Calculate percentage
+                                    return `${tooltipItem.label}: ${count} (${percentage}%)`; // Show count and percentage
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: function(context) {
+                                // Only show datalabels for top 10
+                                return context.dataIndex < 10;
+                            },
+                            font: {
+                                size: 12 // Adjust font size for the labels
+                            },
+                            align: 'end', // Or 'start', 'center', 'right', 'left'
+                            offset: 10,   // Adjust the offset from the center
+                            borderRadius: 4,
+                            borderColor: 'black',
+                            borderWidth: 2
+                        }
+                    }
+                }
+            });
+        }
+
+
+
+        // Update Statistics (Total Cases, Total People Helped)
+        function updateStatistics(data) {
+            const totalCases = data.length;
+            const totalPeopleHelped = data.reduce((sum, item) => sum + (item['Total Number Helped'] || 0), 0);
+
+            document.getElementById('totalCases').innerText = totalCases;
+            document.getElementById('totalPeopleHelped').innerText = totalPeopleHelped;
+        }      
+    </script>
+</body>
+</html>
