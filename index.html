@@ -14,8 +14,7 @@
     <div class="container">
         <!-- Filters Section -->
         <div class="filters">
-            <h2>Filters</h2>
-            <h3>Select different Filters and Click "Go" to Update Data</h3>
+            <h3>Change the Filters and Click "Go" to Update Data & Visuals</h3>
             <div class="filter-group">
                 <label for="year">Year</label>
                 <select id="year">
@@ -141,10 +140,18 @@
                     <option value="94 PI Referral">94 PI Referral</option>
                 </select>
             </div>
+            <div class="filter-group">
+                <label for="intake-office">Intake Office</label>
+                <select id="intake-office">
+                    <option value="all" selected>All Offices</option>
+                    <option value="Adams Street">Adams Street</option>
+                    <option value="Clay County">Clay County</option>
+                    <option value="Saint Johns">Saint Johns</option>
+                </select>
+            </div>
             <button id="goButton" onclick="updateCharts()">Go</button>
             <div>
-            <br><br><br>
-            <br><br><br>
+            <br><br>
             <!-- Statistics Section -->
             <div class="statistics">
                 <div class="stat">
@@ -156,8 +163,7 @@
                     <p id="totalPeopleHelped">0</p>
                 </div>
             </div>
-            <br><br><br><br>
-            <br><br><br><br>
+            <br>
             </div>
             <div><h4>Data derived from Cases Report - General Analysis on Legal Server</h4></div>
         </div>
@@ -166,10 +172,14 @@
         <div class="graphs">
             <div class="bar-chart">
                 <h2>Top Legal Problems</h2>
-                <canvas id="top_legal_problems_bar" width="100%" height="30"></canvas>
+                <canvas id="top_legal_problems_bar"></canvas>
                 <h2>Top Special Legal Problems</h2>
-                <canvas id="special_legal_problem_chart" width="100%" height="30"></canvas>
+                <canvas id="special_legal_problem_chart"></canvas>
             </div>
+            
+            <!-- Adding a spacer between bar charts and pie charts -->
+            <div style="height: 30px;"></div>
+            
             <div class="pie-charts">
                 <div class="pie-chart">
                     <h2>Case Close Reasons</h2>
@@ -188,7 +198,9 @@
                     <canvas id="age_pie"></canvas>
                 </div>
             </div>
-        </div>  
+        </div>
+
+        
     </div>
 
     <script>
@@ -210,19 +222,20 @@
             const selectedYear = document.getElementById('year').value;
             const selectedProgram = document.getElementById('program').value;
             const selectedFundingCode = document.getElementById('funding-code').value;
+            const selectedIntakeOffice = document.getElementById('intake-office').value;
 
             // Filter data based on selected filters
             let filteredData = allData.filter(item => {
                 // Year filter
                 const yearMatch = selectedYear === 'all' || item['Year Closed'] == selectedYear;
-
                 // Program filter
                 const programMatch = selectedProgram === 'all' || item['Program Name'] === selectedProgram;
-
                 // Funding Code filter
                 const fundingCodeMatch = selectedFundingCode === 'all' || item['Funding Code(s)'] === selectedFundingCode;
+                // Program filter
+                const intakeOfficeMatch = selectedIntakeOffice === 'all' || item['Office Name'] === selectedIntakeOffice;
 
-                return yearMatch && programMatch && fundingCodeMatch;
+                return yearMatch && programMatch && fundingCodeMatch && intakeOfficeMatch;
             });
 
             // Update charts with the filtered data
@@ -405,9 +418,10 @@
         function createPieChart(canvasId, dataCounts, label) {
             // Sort dataCounts by value
             const sortedEntries = Object.entries(dataCounts).sort((a, b) => b[1] - a[1]);
+            const topEntries = sortedEntries.slice(0, 8);
 
             // Extract labels and data
-            const labels = sortedEntries.map(entry => entry[0]);
+            const labels = topEntries.map(entry => entry[0]); // Get labels for top 8 slices
             const data = sortedEntries.map(entry => entry[1]);
 
             // Calculate total count for percentage calculation
@@ -417,7 +431,7 @@
             pieChartInstances[canvasId] = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: labels,
+                    labels: labels, // Use all labels
                     datasets: [{
                         data: data,
                         backgroundColor: [
@@ -426,7 +440,13 @@
                             'rgba(255, 206, 86, 0.2)',
                             'rgba(75, 192, 192, 0.2)',
                             'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)',
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
@@ -434,7 +454,13 @@
                             'rgba(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)',
                             'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
                         ],
                         borderWidth: 1
                     }]
@@ -446,7 +472,21 @@
                         legend: {
                             position: 'right',
                             labels: {
-                                padding: 20, // Increase this if labels overlap with the edges
+                                generateLabels: function(chart) {
+                                    // Show labels only for the top 10 entries
+                                    return chart.data.labels.slice(0, 10).map((label, index) => {
+                                        const dataset = chart.data.datasets[0];
+                                        return {
+                                            text: label,
+                                            fillStyle: dataset.backgroundColor[index],
+                                            strokeStyle: dataset.borderColor[index],
+                                            lineWidth: dataset.borderWidth,
+                                            hidden: isNaN(dataset.data[index]) || dataset.data[index] === null,
+                                            index: index
+                                        };
+                                    });
+                                },
+                                padding: 20 // Increase this if labels overlap with the edges
                             }
                         },
                         tooltip: {
@@ -459,6 +499,10 @@
                             }
                         },
                         datalabels: {
+                            display: function(context) {
+                                // Only show datalabels for top 10
+                                return context.dataIndex < 10;
+                            },
                             font: {
                                 size: 12 // Adjust font size for the labels
                             },
@@ -472,6 +516,7 @@
                 }
             });
         }
+
 
 
         // Update Statistics (Total Cases, Total People Helped)
